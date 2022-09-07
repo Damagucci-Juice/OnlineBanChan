@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00D5CD4C28C8559A001DE12A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */; };
+		00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4D28C85758001DE12A /* PaddingLabel.swift */; };
 		00F432CE28C8340300557C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432CD28C8340300557C58 /* AppDelegate.swift */; };
 		00F432D028C8340300557C58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432CF28C8340300557C58 /* SceneDelegate.swift */; };
 		00F432D228C8340300557C58 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432D128C8340300557C58 /* MainViewController.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		00D5CD4D28C85758001DE12A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		00F432CA28C8340300557C58 /* Onban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Onban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F432CD28C8340300557C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00F432CF28C8340300557C58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +91,66 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00D5CD4428C853E8001DE12A /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				00F432DB28C8340400557C58 /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		00D5CD4528C854BD001DE12A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				00F432D628C8340400557C58 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		00D5CD4628C8551D001DE12A /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				00D5CD4A28C85588001DE12A /* Extension */,
+				00D5CD4928C85553001DE12A /* Model */,
+				00D5CD4828C8554A001DE12A /* Present */,
+				00D5CD4728C85543001DE12A /* Common */,
+				00F432CF28C8340300557C58 /* SceneDelegate.swift */,
+				00F432CD28C8340300557C58 /* AppDelegate.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		00D5CD4728C85543001DE12A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				00D5CD4D28C85758001DE12A /* PaddingLabel.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		00D5CD4828C8554A001DE12A /* Present */ = {
+			isa = PBXGroup;
+			children = (
+				00F432D128C8340300557C58 /* MainViewController.swift */,
+			);
+			path = Present;
+			sourceTree = "<group>";
+		};
+		00D5CD4928C85553001DE12A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		00D5CD4A28C85588001DE12A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		00F432C128C8340300557C58 = {
 			isa = PBXGroup;
 			children = (
@@ -112,11 +176,9 @@
 		00F432CC28C8340300557C58 /* Onban */ = {
 			isa = PBXGroup;
 			children = (
-				00F432CD28C8340300557C58 /* AppDelegate.swift */,
-				00F432CF28C8340300557C58 /* SceneDelegate.swift */,
-				00F432D128C8340300557C58 /* MainViewController.swift */,
-				00F432D628C8340400557C58 /* Assets.xcassets */,
-				00F432DB28C8340400557C58 /* Info.plist */,
+				00D5CD4428C853E8001DE12A /* Configuration */,
+				00D5CD4528C854BD001DE12A /* Resources */,
+				00D5CD4628C8551D001DE12A /* Sources */,
 			);
 			path = Onban;
 			sourceTree = "<group>";
@@ -417,8 +479,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				00F432D228C8340300557C58 /* MainViewController.swift in Sources */,
+				00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */,
 				00F432CE28C8340300557C58 /* AppDelegate.swift in Sources */,
 				00F432D028C8340300557C58 /* SceneDelegate.swift in Sources */,
+				00D5CD4C28C8559A001DE12A /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +645,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Onban/Info.plist;
+				INFOPLIST_FILE = Onban/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -608,7 +672,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Onban/Info.plist;
+				INFOPLIST_FILE = Onban/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
