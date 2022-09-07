@@ -10,10 +10,34 @@ import SnapKit
 
 class MainViewController: UIViewController {
 
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.white
+        return collectionView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .red
-        self.navigationItem.title = "온반"
+        setupAttribute()
+        setupLayout()
+        setupBinding()
     }
-
+    
+    private func setupAttribute() {
+        self.navigationItem.title = "Odering"
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+    
+    private func setupLayout() {
+        self.view.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    private func setupBinding() {
+        
+    }
 }

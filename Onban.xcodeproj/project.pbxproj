@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006168A128C892D10047641E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006168A028C892D10047641E /* Assets.xcassets */; };
+		006168A328C8949B0047641E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006168A228C8949B0047641E /* Launch Screen.storyboard */; };
 		00D5CD4C28C8559A001DE12A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */; };
 		00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4D28C85758001DE12A /* PaddingLabel.swift */; };
 		00D5CD6428C85CF3001DE12A /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */; };
@@ -17,10 +19,12 @@
 		00D60C9A28C871A600BBA3FC /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 00D60C9928C871A600BBA3FC /* .swiftlint.yml */; };
 		00D60C9B28C871A600BBA3FC /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 00D60C9928C871A600BBA3FC /* .swiftlint.yml */; };
 		00D60C9C28C871A600BBA3FC /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 00D60C9928C871A600BBA3FC /* .swiftlint.yml */; };
+		00D60CA128C876C500BBA3FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D60CA028C876C500BBA3FC /* LoginViewController.swift */; };
+		00D60CA228C876C500BBA3FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D60CA028C876C500BBA3FC /* LoginViewController.swift */; };
+		00D60CA328C876C500BBA3FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D60CA028C876C500BBA3FC /* LoginViewController.swift */; };
 		00F432CE28C8340300557C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432CD28C8340300557C58 /* AppDelegate.swift */; };
 		00F432D028C8340300557C58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432CF28C8340300557C58 /* SceneDelegate.swift */; };
 		00F432D228C8340300557C58 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432D128C8340300557C58 /* MainViewController.swift */; };
-		00F432D728C8340400557C58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00F432D628C8340400557C58 /* Assets.xcassets */; };
 		00F432E528C8340400557C58 /* OnbanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432E428C8340400557C58 /* OnbanTests.swift */; };
 		00F432EF28C8340400557C58 /* OnbanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432EE28C8340400557C58 /* OnbanUITests.swift */; };
 		00F432F128C8340400557C58 /* OnbanUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432F028C8340400557C58 /* OnbanUITestsLaunchTests.swift */; };
@@ -60,17 +64,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		006168A028C892D10047641E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		006168A228C8949B0047641E /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		00D5CD4D28C85758001DE12A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
 		00D5CD6328C85CF3001DE12A /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		00D5CD6628C85DB9001DE12A /* UIFont+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+CustomFont.swift"; sourceTree = "<group>"; };
 		00D60C9928C871A600BBA3FC /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		00D60C9D28C875FF00BBA3FC /* Onban.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Onban.entitlements; sourceTree = "<group>"; };
+		00D60CA028C876C500BBA3FC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		00F432CA28C8340300557C58 /* Onban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Onban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F432CD28C8340300557C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00F432CF28C8340300557C58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		00F432D128C8340300557C58 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		00F432D628C8340400557C58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00F432DB28C8340400557C58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00F432E028C8340400557C58 /* OnbanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnbanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F432E428C8340400557C58 /* OnbanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbanTests.swift; sourceTree = "<group>"; };
@@ -127,8 +134,8 @@
 		00D5CD4528C854BD001DE12A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				00F432D628C8340400557C58 /* Assets.xcassets */,
 				00D5CD4F28C85A30001DE12A /* Fonts */,
+				006168A228C8949B0047641E /* Launch Screen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -159,6 +166,8 @@
 		00D5CD4828C8554A001DE12A /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				00D60C9F28C876AB00BBA3FC /* Login */,
+				00D60C9E28C876A400BBA3FC /* Detail */,
 				00D5CD6B28C86C1C001DE12A /* MVVM */,
 				00D5CD6A28C86C01001DE12A /* Main */,
 			);
@@ -219,6 +228,21 @@
 			path = MVVM;
 			sourceTree = "<group>";
 		};
+		00D60C9E28C876A400BBA3FC /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		00D60C9F28C876AB00BBA3FC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				00D60CA028C876C500BBA3FC /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		00F432C128C8340300557C58 = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +269,8 @@
 		00F432CC28C8340300557C58 /* Onban */ = {
 			isa = PBXGroup;
 			children = (
+				006168A028C892D10047641E /* Assets.xcassets */,
+				00D60C9D28C875FF00BBA3FC /* Onban.entitlements */,
 				00D5CD4428C853E8001DE12A /* Configuration */,
 				00D5CD4528C854BD001DE12A /* Resources */,
 				00D5CD4628C8551D001DE12A /* Sources */,
@@ -405,7 +431,8 @@
 			files = (
 				00D60C9A28C871A600BBA3FC /* .swiftlint.yml in Resources */,
 				00D5CD6428C85CF3001DE12A /* SF-Pro-Display-Regular.otf in Resources */,
-				00F432D728C8340400557C58 /* Assets.xcassets in Resources */,
+				006168A128C892D10047641E /* Assets.xcassets in Resources */,
+				006168A328C8949B0047641E /* Launch Screen.storyboard in Resources */,
 				00D5CD6528C85CF3001DE12A /* SF-Pro-Display-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,6 +580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D60CA128C876C500BBA3FC /* LoginViewController.swift in Sources */,
 				00D5CD6728C85DB9001DE12A /* UIFont+CustomFont.swift in Sources */,
 				00F432D228C8340300557C58 /* MainViewController.swift in Sources */,
 				00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */,
@@ -566,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D60CA228C876C500BBA3FC /* LoginViewController.swift in Sources */,
 				00F432E528C8340400557C58 /* OnbanTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -574,6 +603,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D60CA328C876C500BBA3FC /* LoginViewController.swift in Sources */,
 				00F432EF28C8340400557C58 /* OnbanUITests.swift in Sources */,
 				00F432F128C8340400557C58 /* OnbanUITestsLaunchTests.swift in Sources */,
 			);
@@ -599,6 +629,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = Color;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -661,6 +692,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = Color;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -718,12 +750,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Onban/Onban.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Onban/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -745,12 +780,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Onban/Onban.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Onban/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
