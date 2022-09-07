@@ -1,7 +1,7 @@
 excluded:
     - Pods
-    - 프로젝트명Tests
-    - 프로젝트명UITests
+    - OnbanTests
+    - OnbanUITests
 disabled_rules:
     - trailing_whitespace
     - identifier_name
