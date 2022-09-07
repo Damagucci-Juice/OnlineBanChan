@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		00D5CD4C28C8559A001DE12A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */; };
 		00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4D28C85758001DE12A /* PaddingLabel.swift */; };
+		00D5CD6428C85CF3001DE12A /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */; };
+		00D5CD6528C85CF3001DE12A /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D5CD6328C85CF3001DE12A /* SF-Pro-Display-Bold.otf */; };
+		00D5CD6728C85DB9001DE12A /* UIFont+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD6628C85DB9001DE12A /* UIFont+CustomFont.swift */; };
 		00F432CE28C8340300557C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432CD28C8340300557C58 /* AppDelegate.swift */; };
 		00F432D028C8340300557C58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432CF28C8340300557C58 /* SceneDelegate.swift */; };
 		00F432D228C8340300557C58 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432D128C8340300557C58 /* MainViewController.swift */; };
@@ -41,6 +44,9 @@
 /* Begin PBXFileReference section */
 		00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		00D5CD4D28C85758001DE12A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		00D5CD6328C85CF3001DE12A /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		00D5CD6628C85DB9001DE12A /* UIFont+CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+CustomFont.swift"; sourceTree = "<group>"; };
 		00F432CA28C8340300557C58 /* Onban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Onban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F432CD28C8340300557C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00F432CF28C8340300557C58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				00F432D628C8340400557C58 /* Assets.xcassets */,
+				00D5CD4F28C85A30001DE12A /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -147,8 +154,18 @@
 			isa = PBXGroup;
 			children = (
 				00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */,
+				00D5CD6628C85DB9001DE12A /* UIFont+CustomFont.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		00D5CD4F28C85A30001DE12A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				00D5CD6328C85CF3001DE12A /* SF-Pro-Display-Bold.otf */,
+				00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		00F432C128C8340300557C58 = {
@@ -333,7 +350,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D5CD6428C85CF3001DE12A /* SF-Pro-Display-Regular.otf in Resources */,
 				00F432D728C8340400557C58 /* Assets.xcassets in Resources */,
+				00D5CD6528C85CF3001DE12A /* SF-Pro-Display-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D5CD6728C85DB9001DE12A /* UIFont+CustomFont.swift in Sources */,
 				00F432D228C8340300557C58 /* MainViewController.swift in Sources */,
 				00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */,
 				00F432CE28C8340300557C58 /* AppDelegate.swift in Sources */,

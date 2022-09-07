@@ -20,7 +20,6 @@ extension UIColor {
     
     static let white = color(r: 255, g: 255, b: 255)
 
-    
     private static func color(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1) -> UIColor {
         UIColor(red: r / 255, green: g / 255, blue: b / 255, alpha: a)
     }
