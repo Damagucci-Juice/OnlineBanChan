@@ -16,6 +16,14 @@
 		006168AD28C8CCDB0047641E /* UIReusableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168AC28C8CCDB0047641E /* UIReusableView+Extension.swift */; };
 		006168AF28C8DE9B0047641E /* MainCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168AE28C8DE9B0047641E /* MainCollectionReusableView.swift */; };
 		006168ED28C8F27A0047641E /* LayoutConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168EC28C8F27A0047641E /* LayoutConstant.swift */; };
+		006168EF28C989630047641E /* CategoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168EE28C989630047641E /* CategoryDTO.swift */; };
+		006168F128C989D60047641E /* DishDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168F028C989D60047641E /* DishDTO.swift */; };
+		006168F328C98BC00047641E /* PaddingLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168F228C98BC00047641E /* PaddingLabelFactory.swift */; };
+		006168F528C9978D0047641E /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168F428C9978D0047641E /* ImageManager.swift */; };
+		006168F728C998450047641E /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168F628C998450047641E /* CacheManager.swift */; };
+		006168F928C998D30047641E /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168F828C998D30047641E /* UIImage+Extension.swift */; };
+		006168FB28C999A80047641E /* ImageCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168FA28C999A80047641E /* ImageCacheType.swift */; };
+		006168FD28C9B42F0047641E /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168FC28C9B42F0047641E /* URL+Extension.swift */; };
 		00D5CD4C28C8559A001DE12A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */; };
 		00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4D28C85758001DE12A /* PaddingLabel.swift */; };
 		00D5CD6428C85CF3001DE12A /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */; };
@@ -80,6 +88,14 @@
 		006168AC28C8CCDB0047641E /* UIReusableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIReusableView+Extension.swift"; sourceTree = "<group>"; };
 		006168AE28C8DE9B0047641E /* MainCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionReusableView.swift; sourceTree = "<group>"; };
 		006168EC28C8F27A0047641E /* LayoutConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstant.swift; sourceTree = "<group>"; };
+		006168EE28C989630047641E /* CategoryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDTO.swift; sourceTree = "<group>"; };
+		006168F028C989D60047641E /* DishDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDTO.swift; sourceTree = "<group>"; };
+		006168F228C98BC00047641E /* PaddingLabelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabelFactory.swift; sourceTree = "<group>"; };
+		006168F428C9978D0047641E /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		006168F628C998450047641E /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		006168F828C998D30047641E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		006168FA28C999A80047641E /* ImageCacheType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheType.swift; sourceTree = "<group>"; };
+		006168FC28C9B42F0047641E /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
 		00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		00D5CD4D28C85758001DE12A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
@@ -172,6 +188,10 @@
 			isa = PBXGroup;
 			children = (
 				00D5CD4D28C85758001DE12A /* PaddingLabel.swift */,
+				006168F428C9978D0047641E /* ImageManager.swift */,
+				006168F628C998450047641E /* CacheManager.swift */,
+				006168FA28C999A80047641E /* ImageCacheType.swift */,
+				006168F228C98BC00047641E /* PaddingLabelFactory.swift */,
 				006168EC28C8F27A0047641E /* LayoutConstant.swift */,
 			);
 			path = Common;
@@ -191,6 +211,8 @@
 		00D5CD4928C85553001DE12A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				006168EE28C989630047641E /* CategoryDTO.swift */,
+				006168F028C989D60047641E /* DishDTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,7 +221,9 @@
 			isa = PBXGroup;
 			children = (
 				00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */,
+				006168F828C998D30047641E /* UIImage+Extension.swift */,
 				00D5CD6628C85DB9001DE12A /* UIFont+CustomFont.swift */,
+				006168FC28C9B42F0047641E /* URL+Extension.swift */,
 				006168A828C8CA440047641E /* UIStackView+Extension.swift */,
 				006168AA28C8CA670047641E /* UIView+Extension.swift */,
 				006168AC28C8CCDB0047641E /* UIReusableView+Extension.swift */,
@@ -601,20 +625,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				006168F128C989D60047641E /* DishDTO.swift in Sources */,
 				006168AB28C8CA670047641E /* UIView+Extension.swift in Sources */,
 				00D60CA128C876C500BBA3FC /* LoginViewController.swift in Sources */,
+				006168FD28C9B42F0047641E /* URL+Extension.swift in Sources */,
+				006168F528C9978D0047641E /* ImageManager.swift in Sources */,
+				006168EF28C989630047641E /* CategoryDTO.swift in Sources */,
 				006168A728C8BC670047641E /* MainCollectionViewCell.swift in Sources */,
 				006168ED28C8F27A0047641E /* LayoutConstant.swift in Sources */,
+				006168F928C998D30047641E /* UIImage+Extension.swift in Sources */,
 				00D5CD6728C85DB9001DE12A /* UIFont+CustomFont.swift in Sources */,
+				006168F328C98BC00047641E /* PaddingLabelFactory.swift in Sources */,
 				006168A928C8CA440047641E /* UIStackView+Extension.swift in Sources */,
 				00F432D228C8340300557C58 /* MainViewController.swift in Sources */,
 				00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */,
 				00F432CE28C8340300557C58 /* AppDelegate.swift in Sources */,
+				006168F728C998450047641E /* CacheManager.swift in Sources */,
 				00F432D028C8340300557C58 /* SceneDelegate.swift in Sources */,
 				006168AD28C8CCDB0047641E /* UIReusableView+Extension.swift in Sources */,
 				00D5CD4C28C8559A001DE12A /* UIColor+Extension.swift in Sources */,
 				006168A528C8BBFC0047641E /* MainDatasource.swift in Sources */,
 				006168AF28C8DE9B0047641E /* MainCollectionReusableView.swift in Sources */,
+				006168FB28C999A80047641E /* ImageCacheType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,7 +738,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -762,7 +794,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

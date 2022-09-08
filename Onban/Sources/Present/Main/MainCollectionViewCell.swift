@@ -9,11 +9,14 @@ import UIKit
 
 final class MainCollectionViewCell: UICollectionViewCell {
     
+    private let imageManager = ImageManager.shared
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = 10
+        imageView.backgroundColor = UIColor.grey3
         return imageView
     }()
     
@@ -56,8 +59,9 @@ final class MainCollectionViewCell: UICollectionViewCell {
     private let eventStackView: UIStackView = {
         let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
-        horizontalStackView.distribution = .equalCentering
+        horizontalStackView.distribution = .equalSpacing
         horizontalStackView.alignment = .firstBaseline
+        horizontalStackView.spacing = 4
         return horizontalStackView
     }()
     
@@ -108,21 +112,26 @@ final class MainCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    // TODO: - 이벤트 패딩레이블 만들어서 eventStackView에 추가하는 코드 추가해야함
-    func setup<T: Codable>(with object: T) {
-        imageView.image = UIImage(named: "mockImage.png")
-        title.text = "오리 주물럭_반조리"
-        body.text = "감질맛 나는 매콤한 양념"
-        reducedPrice.text = "12,640원"
-        originPrice.text = "15,800원"
+    func setup(_ dish: DishDTO) {
+        guard let url = URL(string: dish.image) else { return }
+        Task {
+            imageView.image = await imageManager.loadImage(url: url)
+        }
+        title.text = dish.title
+        body.text = dish.bodyDescription
+        reducedPrice.text = dish.reducedPrice
+        originPrice.text = dish.originPrice
+        eventStackView.addArrangedSubViews(PaddingLabelFactory.makeEventBadges(dish.eventBadge))
     }
     
-    // MARK: - DTO 설정되면 지울 메서드
-    func setup() {
-        imageView.image = UIImage(named: "mockImage.png")
-        title.text = "오리 주물럭_반조리"
-        body.text = "감질맛 나는 매콤한 양념"
-        reducedPrice.text = "12,640원"
-        originPrice.text = "15,800원"
+    override func prepareForReuse() {
+        imageView.image = nil
+        title.text = .none
+        body.text = .none
+        reducedPrice.text = .none
+        originPrice.text = .none
+        eventStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
 }

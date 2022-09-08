@@ -27,3 +27,26 @@ final class PaddingLabel: UILabel {
         return contentSize
     }
 }
+
+extension PaddingLabel {
+    var asEventBadge: Self {
+        self.textColor = UIColor.white
+        self.font = UIFont.caption
+        self.padding = UIEdgeInsets(top: 4, left: 6, bottom: 4, right: 6)
+        self.isCapsule = true
+        self.clipsToBounds = true
+        return self
+    }
+    
+    func setupAttribute(_ event: EventBadge) {
+        switch event {
+        case .luanchingSpecialPrice:
+            self.backgroundColor = UIColor.primary1
+        case .mainSpecialPrice:
+            self.backgroundColor = UIColor.primary2
+        case .eventSpecialPrice:
+            self.backgroundColor = UIColor.primary3
+        }
+        self.text = event.rawValue
+    }
+}

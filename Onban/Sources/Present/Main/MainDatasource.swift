@@ -26,7 +26,19 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
                                      for: indexPath) as? MainCollectionViewCell
         else { return UICollectionViewCell() }
         
-        cell.setup()
+        let dish = DishDTO(
+            detailHash: "H72C3",
+            image: "http://public.codesquad.kr/jk/storeapp/data/soup/28_ZIP_P_1003_T.jpg",
+            alt: "한돈 돼지 김치찌개",
+            deliveryType: [.earlyDelivery, .nationalPost],
+            title: "한돈 돼지 김치찌개",
+            bodyDescription: "김치찌개에는 역시 돼지고기",
+            originPrice: "9,300원",
+            reducedPrice: "8,370원",
+            eventBadge: [.eventSpecialPrice, .luanchingSpecialPrice, .mainSpecialPrice]
+        )
+        
+        cell.setup(dish)
         return cell
     }
     
