@@ -7,9 +7,11 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-class MainViewController: UIViewController {
-
+class MainViewController: UIViewController, View {
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -17,10 +19,13 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
-    private let dataSource = MainDatasource()
+    private let dataSource: MainDatasource
+    private let disposeBag = DisposeBag()
     
-    override init(nibName nibNameOrNil: String? = nil, bundle nibBundleOrNil: Bundle? = nil) {
-        super.init(nibName: .none, bundle: .none)
+    init(viewModel: MainViewModel) {
+        self.dataSource = MainDatasource(viewModel: viewModel)
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
     }
     
     @available(*, unavailable)
@@ -32,7 +37,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupAttribute()
         setupLayout()
-        setupBinding()
+        viewModel?.action.viewDidLoad.accept(())
     }
     
     private func setupAttribute() {
@@ -58,7 +63,14 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func setupBinding() {
+    func bind(to viewModel: MainViewModel) {
         
+        viewModel.state.reloadData
+            .bind { [weak self] in
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }

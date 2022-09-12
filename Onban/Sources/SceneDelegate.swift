@@ -16,9 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let mainVC = MainViewController()
-        // MARK: - identifiers 에서 앱 등록 문제로 애플로그인 진행 불가.  나중에 필요할 때 JK 에게 요청
-//        let loginVC = LoginViewController()
+        let mainViewModel = MainViewModel()
+        let mainVC = MainViewController(viewModel: mainViewModel)
         
         let navigationController = UINavigationController(rootViewController: mainVC)
         let window = UIWindow(windowScene: windowScene)

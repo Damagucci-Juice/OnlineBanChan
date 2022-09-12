@@ -24,6 +24,16 @@
 		006168F928C998D30047641E /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168F828C998D30047641E /* UIImage+Extension.swift */; };
 		006168FB28C999A80047641E /* ImageCacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168FA28C999A80047641E /* ImageCacheType.swift */; };
 		006168FD28C9B42F0047641E /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168FC28C9B42F0047641E /* URL+Extension.swift */; };
+		006168FF28CEE6760047641E /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006168FE28CEE6760047641E /* APIResult.swift */; };
+		0061690128CEE6A80047641E /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690028CEE6A80047641E /* BaseAPI.swift */; };
+		0061690328CEE78F0047641E /* OnbanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690228CEE78F0047641E /* OnbanAPI.swift */; };
+		0061690628CEEA1C0047641E /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690528CEEA1C0047641E /* NetworkResult.swift */; };
+		0061690828CEEB950047641E /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690728CEEB950047641E /* URLSessionProtocol.swift */; };
+		0061690A28CEECD90047641E /* URLSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690928CEECD90047641E /* URLSessionProvider.swift */; };
+		0061690C28CEFAFC0047641E /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690B28CEFAFC0047641E /* NetworkRepository.swift */; };
+		0061690E28CEFE280047641E /* OnbanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690D28CEFE280047641E /* OnbanRepository.swift */; };
+		0061691028CF035B0047641E /* MVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690F28CF035B0047641E /* MVVM.swift */; };
+		0061691228CF050E0047641E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061691128CF050E0047641E /* MainViewModel.swift */; };
 		00D5CD4C28C8559A001DE12A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */; };
 		00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4D28C85758001DE12A /* PaddingLabel.swift */; };
 		00D5CD6428C85CF3001DE12A /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */; };
@@ -96,6 +106,16 @@
 		006168F828C998D30047641E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		006168FA28C999A80047641E /* ImageCacheType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheType.swift; sourceTree = "<group>"; };
 		006168FC28C9B42F0047641E /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		006168FE28CEE6760047641E /* APIResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResult.swift; sourceTree = "<group>"; };
+		0061690028CEE6A80047641E /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		0061690228CEE78F0047641E /* OnbanAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbanAPI.swift; sourceTree = "<group>"; };
+		0061690528CEEA1C0047641E /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		0061690728CEEB950047641E /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		0061690928CEECD90047641E /* URLSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProvider.swift; sourceTree = "<group>"; };
+		0061690B28CEFAFC0047641E /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
+		0061690D28CEFE280047641E /* OnbanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbanRepository.swift; sourceTree = "<group>"; };
+		0061690F28CF035B0047641E /* MVVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM.swift; sourceTree = "<group>"; };
+		0061691128CF050E0047641E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		00D5CD4D28C85758001DE12A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
@@ -153,6 +173,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0061690428CEEA110047641E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				0061690528CEEA1C0047641E /* NetworkResult.swift */,
+				0061690728CEEB950047641E /* URLSessionProtocol.swift */,
+				0061690928CEECD90047641E /* URLSessionProvider.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		00D5CD4428C853E8001DE12A /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +203,7 @@
 		00D5CD4628C8551D001DE12A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				00D5CD4A28C85588001DE12A /* Extension */,
 				00D5CD6928C86BEE001DE12A /* Repository */,
 				00D5CD6828C86BD7001DE12A /* API */,
 				00D5CD4928C85553001DE12A /* Model */,
@@ -243,7 +274,9 @@
 		00D5CD6828C86BD7001DE12A /* API */ = {
 			isa = PBXGroup;
 			children = (
-				00D5CD4A28C85588001DE12A /* Extension */,
+				006168FE28CEE6760047641E /* APIResult.swift */,
+				0061690028CEE6A80047641E /* BaseAPI.swift */,
+				0061690228CEE78F0047641E /* OnbanAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -251,6 +284,9 @@
 		00D5CD6928C86BEE001DE12A /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				0061690428CEEA110047641E /* Base */,
+				0061690B28CEFAFC0047641E /* NetworkRepository.swift */,
+				0061690D28CEFE280047641E /* OnbanRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -259,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				00F432D128C8340300557C58 /* MainViewController.swift */,
+				0061691128CF050E0047641E /* MainViewModel.swift */,
 				006168A428C8BBFC0047641E /* MainDatasource.swift */,
 				006168A628C8BC670047641E /* MainCollectionViewCell.swift */,
 				006168AE28C8DE9B0047641E /* MainCollectionReusableView.swift */,
@@ -269,6 +306,7 @@
 		00D5CD6B28C86C1C001DE12A /* MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				0061690F28CF035B0047641E /* MVVM.swift */,
 			);
 			path = MVVM;
 			sourceTree = "<group>";
@@ -625,12 +663,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0061690828CEEB950047641E /* URLSessionProtocol.swift in Sources */,
 				006168F128C989D60047641E /* DishDTO.swift in Sources */,
 				006168AB28C8CA670047641E /* UIView+Extension.swift in Sources */,
 				00D60CA128C876C500BBA3FC /* LoginViewController.swift in Sources */,
 				006168FD28C9B42F0047641E /* URL+Extension.swift in Sources */,
+				0061690A28CEECD90047641E /* URLSessionProvider.swift in Sources */,
 				006168F528C9978D0047641E /* ImageManager.swift in Sources */,
 				006168EF28C989630047641E /* CategoryDTO.swift in Sources */,
+				0061690C28CEFAFC0047641E /* NetworkRepository.swift in Sources */,
 				006168A728C8BC670047641E /* MainCollectionViewCell.swift in Sources */,
 				006168ED28C8F27A0047641E /* LayoutConstant.swift in Sources */,
 				006168F928C998D30047641E /* UIImage+Extension.swift in Sources */,
@@ -638,15 +679,22 @@
 				006168F328C98BC00047641E /* PaddingLabelFactory.swift in Sources */,
 				006168A928C8CA440047641E /* UIStackView+Extension.swift in Sources */,
 				00F432D228C8340300557C58 /* MainViewController.swift in Sources */,
+				0061690328CEE78F0047641E /* OnbanAPI.swift in Sources */,
 				00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */,
+				0061690E28CEFE280047641E /* OnbanRepository.swift in Sources */,
 				00F432CE28C8340300557C58 /* AppDelegate.swift in Sources */,
 				006168F728C998450047641E /* CacheManager.swift in Sources */,
 				00F432D028C8340300557C58 /* SceneDelegate.swift in Sources */,
 				006168AD28C8CCDB0047641E /* UIReusableView+Extension.swift in Sources */,
+				0061690628CEEA1C0047641E /* NetworkResult.swift in Sources */,
 				00D5CD4C28C8559A001DE12A /* UIColor+Extension.swift in Sources */,
+				006168FF28CEE6760047641E /* APIResult.swift in Sources */,
+				0061691028CF035B0047641E /* MVVM.swift in Sources */,
 				006168A528C8BBFC0047641E /* MainDatasource.swift in Sources */,
+				0061690128CEE6A80047641E /* BaseAPI.swift in Sources */,
 				006168AF28C8DE9B0047641E /* MainCollectionReusableView.swift in Sources */,
 				006168FB28C999A80047641E /* ImageCacheType.swift in Sources */,
+				0061691228CF050E0047641E /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

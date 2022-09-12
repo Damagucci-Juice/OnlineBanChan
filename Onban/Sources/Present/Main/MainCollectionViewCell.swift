@@ -90,7 +90,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layoutSubviews()
+        layoutSubviews() 
     }
     
     override func layoutSubviews() {

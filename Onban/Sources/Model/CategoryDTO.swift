@@ -11,3 +11,4 @@ struct CategoryDTO: Codable {
     let statusCode: Int
     let body: [DishDTO]
 }
+ 
