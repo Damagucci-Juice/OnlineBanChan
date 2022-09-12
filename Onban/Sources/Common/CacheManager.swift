@@ -20,7 +20,6 @@ final class CacheManager {
     
     private let config: Config
     
-    /// 아래의 질문에 답하려면 Encode 된 이미지와 Decode 된 이미지의 차이점에 대해 이야기할 수 있어야 한다.
     // TODO: - 1 lv cache, 2 lv cache 를 나눠서 얻는 효용이 무엇인가?
     // 1st level cache, that contains **encoded** images
     private lazy var imageCache: NSCache<NSString, UIImage> = {
@@ -47,12 +46,6 @@ extension CacheManager: ImageCacheType {
     
     func image(for url: URL) -> UIImage? {
         let imageName = url.lastPathComponent as NSString
-        if let destination = cachesDirectory?.appendingPathComponent(imageName as String),
-           FileManager.default.fileExists(atPath: destination.path),
-           let image = UIImage(contentsOfFile: destination.path) {
-            return image
-        }
-        
         if let decodedImage = decodedImageCache.object(forKey: imageName) {
             return decodedImage
         }
@@ -66,17 +59,11 @@ extension CacheManager: ImageCacheType {
     }
     
     func insertImage(_ image: UIImage?, for url: URL) {
-        guard let image = image else { return removeImage(for: url) }
+        guard let image = image else {
+            return removeImage(for: url)
+        }
         let imageName = url.lastPathComponent as NSString
         let decodedImage = image.decodedImage()
-        
-        guard let destination = cachesDirectory?.appendingPathComponent(imageName as String)
-        else { return removeImage(for: url) }
-        do {
-            try FileManager.default.copyItem(at: url, to: destination)
-        } catch {
-            assert(false)
-        }
         
         imageCache.setObject(image, forKey: imageName)
         decodedImageCache.setObject(decodedImage, forKey: imageName, cost: decodedImage.diskSize)

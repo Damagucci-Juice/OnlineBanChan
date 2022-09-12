@@ -9,7 +9,7 @@ import UIKit
 
 final class MainCollectionViewCell: UICollectionViewCell {
     
-    private let imageManager = ImageManager.shared
+    private weak var imageManager = ImageManager.shared
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -115,7 +115,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
     func setup(_ dish: DishDTO) {
         guard let url = URL(string: dish.image) else { return }
         Task {
-            imageView.image = await imageManager.loadImage(url: url)
+            imageView.image = await imageManager?.loadImage(url: url)
         }
         title.text = dish.title
         body.text = dish.bodyDescription

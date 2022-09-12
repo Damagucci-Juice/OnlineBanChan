@@ -30,7 +30,7 @@ extension ImageManager: ImageManagable {
         }
         
         let result = Task { () -> UIImage?  in
-            guard let (url, _) = try? await URLSession.shared.download(from: url)
+            guard (try? await URLSession.shared.download(from: url)) != nil
             else { return nil }
             self.cache.insertImage(url.asImage, for: url)
             return url.asImage
