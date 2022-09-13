@@ -16,11 +16,11 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.data[section].count
+        return viewModel.getItemCount(of: section)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return viewModel.data.count
+        return viewModel.countOfSections
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -70,7 +70,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
         
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let itemCount = viewModel.data[indexPath.section].count
+            let itemCount = viewModel.getItemCount(of: indexPath.section)
             headerView.setup(by: indexPath.section, itemCount)
         default:
             assert(false)

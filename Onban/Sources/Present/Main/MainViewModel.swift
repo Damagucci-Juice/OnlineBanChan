@@ -11,13 +11,13 @@ import RxSwift
 
 class MainViewModel: ViewModel {
     
-    // TODO: - subscript 할지 결정
     private let repository: OnbanRepository = OnbanRepositoryImpl()
-    lazy var data: [[DishDTO]] = []
+    private lazy var items: [[DishDTO]] = []
+    var countOfSections: Int { return items.count }
     
     subscript(indexPath: IndexPath) -> DishDTO? {
         if isValid(indexPath: indexPath) {
-            return data[indexPath.section][indexPath.row]
+            return items[indexPath.section][indexPath.row]
         }
         return nil
     }
@@ -48,21 +48,10 @@ extension MainViewModel {
     func requestMain() {
         Task {
             let main = try await self.repository.reqeuestMain()
-            let side = try await self.repository.reqeuestSide()
-            let soup = try await self.repository.reqeuestSoup()
-            if main.error != nil,
-               side.error != nil,
-               soup.error != nil {
-                return
-            }
-            guard let mainModel = main.value,
-                  let sideModel = side.value,
-                  let soupModel = soup.value else {
-                      return
-                  }
-            let mainViewModel: [[DishDTO]] = [mainModel, soupModel, sideModel]
-            self.data = mainViewModel
-            
+            if main.error != nil { return }
+            guard let mainModel = main.value else { return }
+            let mainViewModel: [[DishDTO]] = mainModel
+            self.items = mainViewModel
             self.state.reloadData.accept(())
         }
     }
@@ -72,9 +61,13 @@ extension MainViewModel {
     private func isValid(indexPath: IndexPath) -> Bool {
         let section = indexPath.section
         let row = indexPath.row
-        if data.count > section && data[section].count > row {
+        if items.count > section && items[section].count > row {
             return true
         }
         return false
+    }
+    
+    func getItemCount(of section: Int) -> Int {
+        return items[section].count
     }
 }
