@@ -31,6 +31,8 @@ final class MainCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.textSmallRegular
         label.textColor = UIColor.grey2
+        label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
@@ -108,6 +110,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         
         descriptionStackView.snp.makeConstraints {
             $0.leading.equalTo(imageView.snp.trailing).offset(8)
+            $0.trailing.equalToSuperview()
             $0.centerY.equalToSuperview()
         }
     }
