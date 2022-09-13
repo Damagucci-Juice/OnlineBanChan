@@ -27,9 +27,10 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView
                 .dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.reusableIdentifier,
-                                     for: indexPath) as? MainCollectionViewCell
+                                     for: indexPath) as? MainCollectionViewCell,
+              let dish = viewModel[indexPath]
         else { return UICollectionViewCell() }
-        let dish = viewModel.data[indexPath.section][indexPath.row]
+        
         cell.setup(dish)
         return cell
     }

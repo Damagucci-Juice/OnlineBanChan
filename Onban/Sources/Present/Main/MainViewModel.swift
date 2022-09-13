@@ -11,9 +11,16 @@ import RxSwift
 
 class MainViewModel: ViewModel {
     
-    // MARK: - 뷰 모델은 무엇을 해야하는가?
+    // TODO: - subscript 할지 결정
     private let repository: OnbanRepository = OnbanRepositoryImpl()
     lazy var data: [[DishDTO]] = []
+    
+    subscript(indexPath: IndexPath) -> DishDTO? {
+        if isValid(indexPath: indexPath) {
+            return data[indexPath.section][indexPath.row]
+        }
+        return nil
+    }
     
     struct Action {
         let viewDidLoad = PublishRelay<Void>()
@@ -58,5 +65,16 @@ extension MainViewModel {
             
             self.state.reloadData.accept(())
         }
+    }
+}
+
+extension MainViewModel {
+    private func isValid(indexPath: IndexPath) -> Bool {
+        let section = indexPath.section
+        let row = indexPath.row
+        if data.count > section && data[section].count > row {
+            return true
+        }
+        return false
     }
 }
