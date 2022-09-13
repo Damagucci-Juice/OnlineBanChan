@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+import Toaster
 
 final class MainCollectionReusableView: UICollectionReusableView {
+    
+    private var itemCount: Int = 0
     
     private let title: UILabel = {
         let label = UILabel()
@@ -21,6 +24,7 @@ final class MainCollectionReusableView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layoutSubviews()
+        attribute()
     }
     
     @available(*, unavailable)
@@ -39,7 +43,8 @@ final class MainCollectionReusableView: UICollectionReusableView {
         }
     }
     
-    func setup(by index: Int) {
+    func setup(by index: Int, _ itemCount: Int) {
+        self.itemCount = itemCount
         switch index {
         case 0:
             title.text = """
@@ -59,5 +64,16 @@ final class MainCollectionReusableView: UICollectionReusableView {
         default:
             assert(false)
         }
+    }
+
+}
+
+extension MainCollectionReusableView {
+    private func attribute() {
+        self.isUserInteractionEnabled = true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Toast(text: "\(itemCount)개의 상품이 등록되어 있습니다.").show()
     }
 }

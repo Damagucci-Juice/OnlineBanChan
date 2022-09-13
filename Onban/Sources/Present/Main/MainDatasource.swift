@@ -70,7 +70,8 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
         
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            headerView.setup(by: indexPath.section)
+            let itemCount = viewModel.data[indexPath.section].count
+            headerView.setup(by: indexPath.section, itemCount)
         default:
             assert(false)
         }
