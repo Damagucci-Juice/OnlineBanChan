@@ -10,7 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class MainViewController: UIViewController, View {
+class MainViewController: UIViewController {
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -25,7 +25,7 @@ class MainViewController: UIViewController, View {
     init(viewModel: MainViewModel) {
         self.dataSource = MainDatasource(viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
-        self.viewModel = viewModel
+        self.bind(self.dataSource)
     }
     
     @available(*, unavailable)
@@ -37,7 +37,6 @@ class MainViewController: UIViewController, View {
         super.viewDidLoad()
         setupAttribute()
         setupLayout()
-        viewModel?.action.viewDidLoad.accept(())
     }
     
     private func setupAttribute() {
@@ -57,15 +56,13 @@ class MainViewController: UIViewController, View {
     
     private func setupLayout() {
         self.view.addSubview(collectionView)
-        
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
     
-    func bind(to viewModel: MainViewModel) {
-        
-        viewModel.state.reloadData
+    private func bind(_ dataSource: MainDatasource) {
+        dataSource.state.reloadData
             .bind { [weak self] in
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()

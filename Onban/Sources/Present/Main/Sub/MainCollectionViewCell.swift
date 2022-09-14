@@ -45,15 +45,8 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     private let originPrice: UILabel = {
         let label = UILabel()
-        label.font = UIFont.textSmallBold
-        let string = "0원"
-        let attributeString = NSMutableAttributedString(string: string)
-        attributeString.addAttribute(
-            NSAttributedString.Key.strikethroughStyle,
-            value: 2,
-            range: NSRange(location: 0, length: attributeString.length)
-        )
-        label.attributedText = attributeString
+        label.font = UIFont.textSmallRegular
+        label.attributedText = UIFactory.makeAttributedString()
         label.textColor = UIColor.grey2
         return label
     }()
@@ -92,12 +85,10 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layoutSubviews() 
+        setupLayout()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+    private func setupLayout() {
         contentView.addSubViews([imageView, descriptionStackView])
         priceStackView.addArrangedSubViews([reducedPrice, originPrice])
         descriptionStackView.addArrangedSubViews([title, body, priceStackView, eventStackView])
@@ -124,7 +115,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         body.text = dish.bodyDescription
         reducedPrice.text = dish.reducedPrice
         originPrice.text = dish.originPrice
-        eventStackView.addArrangedSubViews(PaddingLabelFactory.makeEventBadges(dish.eventBadge))
+        eventStackView.addArrangedSubViews(UIFactory.makeEventBadges(dish.eventBadge))
     }
     
     override func prepareForReuse() {

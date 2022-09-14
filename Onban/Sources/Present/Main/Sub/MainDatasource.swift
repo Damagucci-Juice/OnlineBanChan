@@ -6,21 +6,31 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    typealias ViewModel = MainViewModel
+    private let disposeBag = DisposeBag()
     
-    let viewModel: MainViewModel
+    struct State {
+        var reloadData = PublishRelay<Void>()
+    }
+    
+    let state = State()
     
     init(viewModel: MainViewModel) {
+        super.init()
         self.viewModel = viewModel
+        viewModel.action.viewDidLoad.accept(())
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.getItemCount(of: section)
+        return self.viewModel?.getItemCount(of: section) ?? 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return viewModel.countOfSections
+        return viewModel?.countOfSections ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -28,7 +38,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
         guard let cell = collectionView
                 .dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.reusableIdentifier,
                                      for: indexPath) as? MainCollectionViewCell,
-              let dish = viewModel[indexPath]
+              let dish = viewModel?[indexPath]
         else { return UICollectionViewCell() }
         
         cell.setup(dish)
@@ -70,7 +80,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
         
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let itemCount = viewModel.getItemCount(of: indexPath.section)
+            let itemCount = viewModel?.getItemCount(of: indexPath.section) ?? 0
             headerView.setup(by: indexPath.section, itemCount)
         default:
             assert(false)
@@ -78,4 +88,14 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
         return headerView
     }
 
+}
+
+extension MainDatasource: View {
+    func bind(to viewModel: MainViewModel) {
+        viewModel.state.reloadData
+            .bind { [weak self] in
+                self?.state.reloadData.accept(())
+            }
+            .disposed(by: disposeBag)
+    }
 }

@@ -16,9 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let mainViewModel = MainViewModel()
-        let mainVC = MainViewController(viewModel: mainViewModel)
+//        let mainViewModel = MainViewModel()
+//        let mainVC = MainViewController(viewModel: mainViewModel)
         
+        let detailViewModel = DetailViewModel()
+        let mainVC = DetailViewController(viewModel: detailViewModel)
+
         let navigationController = UINavigationController(rootViewController: mainVC)
         let window = UIWindow(windowScene: windowScene)
         self.window = window
