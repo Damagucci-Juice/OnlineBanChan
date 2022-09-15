@@ -12,15 +12,15 @@ import RxSwift
 class MainViewModel: ViewModel {
     
     private let repository: OnbanRepository = OnbanRepositoryImpl()
-    private lazy var items: [[DishDTO]?] = Array(repeating: nil, count: 3)
-    var countOfSections: Int { return items.count }
+//    private lazy var items: [[DishDTO]?] = Array(repeating: nil, count: 3)
+//    var countOfSections: Int { return items.count }
     
-    subscript(indexPath: IndexPath) -> DishDTO? {
-        if isValid(indexPath: indexPath) {
-            return items[indexPath.section]?[indexPath.row]
-        }
-        return nil
-    }
+//    subscript(indexPath: IndexPath) -> DishDTO? {
+//        if isValid(indexPath: indexPath) {
+//            return items[indexPath.section]?[indexPath.row]
+//        }
+//        return nil
+//    }
     
     struct Action {
         let viewDidLoad = PublishRelay<Void>()
@@ -28,8 +28,9 @@ class MainViewModel: ViewModel {
     }
     
     struct State {
-        let openedDetailPage: () -> Void = { }
-        let reloadedSection = PublishRelay<Int>()
+//        let openedDetailPage: () -> Void = { }
+//        let reloadedSection = PublishRelay<Int>()
+        let items = PublishRelay<(CategoryType, [MainCellViewModel])>()
     }
     
     let action = Action()
@@ -46,32 +47,30 @@ class MainViewModel: ViewModel {
 extension MainViewModel {
     
     func loadViewModels() {
-        [.requestMainDish,
-         .requestSoup,
-         .requestSideDish].enumerated().forEach(requestMain)
+        CategoryType.allCases.enumerated().forEach(requestMain)
     }
     
-    private func requestMain(_ index: Int, _ target: OnbanAPI) {
+    private func requestMain(_ index: Int, _ categoryType: CategoryType) {
         Task {
-            let receive = try await self.repository.requestViewModel(target)
+            let receive = try await self.repository.requestOnbanApi(categoryType)
             if receive.error != nil { return }
-            self.items[index] = receive.value ?? []
-            self.state.reloadedSection.accept(index)
+            let item = (receive.value ?? []).map { MainCellViewModel($0) }
+            self.state.items.accept((categoryType, item))
         }
     }
 }
 
 extension MainViewModel {
-    private func isValid(indexPath: IndexPath) -> Bool {
-        let section = indexPath.section
-        let row = indexPath.row
-        if items.count > section && items[section]?.count ?? 0 > row {
-            return true
-        }
-        return false
-    }
+//    private func isValid(indexPath: IndexPath) -> Bool {
+//        let section = indexPath.section
+//        let row = indexPath.row
+//        if items.count > section && items[section]?.count ?? 0 > row {
+//            return true
+//        }
+//        return false
+//    }
     
-    func getItemCount(of section: Int) -> Int {
-        return items[section]?.count ?? 0
-    }
+//    func getItemCount(of section: Int) -> Int {
+//        return items[section]?.count ?? 0
+//    }
 }

@@ -18,6 +18,7 @@ target 'Onban' do
   pod 'SnapKit', '~> 5.6.0'
   pod 'SwiftLint'
   pod 'Toaster'
+  pod 'RxAppState'
 
   # Pods for Onban
 

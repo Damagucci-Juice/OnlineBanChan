@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 import RxSwift
-import RxCocoa
-import RxRelay
+import RxAppState
 
 class MainViewController: UIViewController {
     
@@ -20,19 +19,8 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
-    private let dataSource: MainDatasource
+    private let dataSource = MainDatasource()
     private let disposeBag = DisposeBag()
-    
-    init(viewModel: MainViewModel) {
-        self.dataSource = MainDatasource(viewModel: viewModel)
-        super.init(nibName: nil, bundle: nil)
-        self.bind(self.dataSource)
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("This initializer shouldn't be used.")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,13 +49,16 @@ class MainViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
     }
-    
-    private func bind(_ dataSource: MainDatasource) {
-        dataSource.state.reloadSectionData
-            .map { IndexSet(integer: $0) }
-            .observe(on: MainScheduler.asyncInstance)
-            .do { print($0) }
-            .bind(onNext: collectionView.reloadSections)
+}
+
+extension MainViewController: View {
+    func bind(to viewModel: MainViewModel) {
+        rx.viewDidLoad
+            .bind(to: viewModel.action.viewDidLoad)
+            .disposed(by: disposeBag)
+        
+        viewModel.state.items
+            .bind(onNext: dataSource.updateItems)
             .disposed(by: disposeBag)
     }
 }

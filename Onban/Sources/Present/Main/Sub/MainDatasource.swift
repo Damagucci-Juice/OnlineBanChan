@@ -6,42 +6,29 @@
 //
 
 import UIKit
-import RxCocoa
-import RxSwift
 
 final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
-    private let disposeBag = DisposeBag()
     
-    struct State {
-        var reloadSectionData = PublishRelay<Int>()
-    }
+    private var items: [[MainCellViewModel]] = Array(repeating: [], count: CategoryType.allCases.count)
     
-    let state = State()
-    
-    init(viewModel: MainViewModel) {
-        super.init()
-        self.viewModel = viewModel
-        viewModel.action.viewDidLoad.accept(())
-    }
+    // MARK: - 숫자를 받았을 때 CategoryType 으로 변환해야한다.
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel?.getItemCount(of: section) ?? 0
+        return items[section].count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return viewModel?.countOfSections ?? 0
+        return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView
                 .dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.reusableIdentifier,
-                                     for: indexPath) as? MainCollectionViewCell,
-              let dish = viewModel?[indexPath]
+                                     for: indexPath) as? MainCollectionViewCell
         else { return UICollectionViewCell() }
-        
-        cell.setup(dish)
+        let dish = items[indexPath.section][indexPath.row]
+        cell.viewModel = dish
         return cell
     }
     
@@ -80,7 +67,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
         
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let itemCount = viewModel?.getItemCount(of: indexPath.section) ?? 0
+            let itemCount = items[indexPath.section].count
             headerView.setup(by: indexPath.section, itemCount)
         default:
             break
@@ -90,10 +77,8 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
 
 }
 
-extension MainDatasource: View {
-    func bind(to viewModel: MainViewModel) {
-        viewModel.state.reloadedSection
-            .bind(to: state.reloadSectionData)
-            .disposed(by: disposeBag)
+extension MainDatasource {
+    func updateItems(_ type: CategoryType  ,_ items: [MainCellViewModel]) {
+        self.items[type.index] = items
     }
 }

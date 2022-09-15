@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 final class MainCollectionViewCell: UICollectionViewCell {
     
     private weak var imageManager = ImageManager.shared
+    
+    private var disposeBag = DisposeBag()
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -106,26 +109,34 @@ final class MainCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setup(_ dish: DishDTO) {
-        guard let url = URL(string: dish.image) else { return }
-        Task {
-            imageView.image = await imageManager?.loadImage(url: url)
-        }
-        title.text = dish.title
-        body.text = dish.bodyDescription
-        reducedPrice.text = dish.reducedPrice
-        originPrice.text = dish.originPrice
-        eventStackView.addArrangedSubViews(UIFactory.makeEventBadges(dish.eventBadge))
-    }
+//    func setup(_ dish: DishDTO) {
+//        guard let url = URL(string: dish.image) else { return }
+//        Task {
+//            imageView.image = await imageManager?.loadImage(url: url)
+//        }
+//        title.text = dish.title
+//        body.text = dish.bodyDescription
+//        reducedPrice.text = dish.reducedPrice
+//        originPrice.text = dish.originPrice
+//        eventStackView.addArrangedSubViews(UIFactory.makeEventBadges(dish.eventBadge))
+//    }
     
     override func prepareForReuse() {
-        imageView.image = nil
-        title.text = .none
-        body.text = .none
-        reducedPrice.text = .none
-        originPrice.text = .none
-        eventStackView.subviews.forEach {
-            $0.removeFromSuperview()
-        }
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
+//        imageView.image = nil
+//        title.text = .none
+//        body.text = .none
+//        reducedPrice.text = .none
+//        originPrice.text = .none
+//        eventStackView.subviews.forEach {
+//            $0.removeFromSuperview()
+//        }
+    }
+}
+
+extension MainCollectionViewCell: View {
+    func bind(to viewModel: MainCellViewModel) {
+        <#code#>
     }
 }

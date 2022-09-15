@@ -16,8 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let mainViewModel = MainViewModel()
-        let mainVC = MainViewController(viewModel: mainViewModel)
+        let mainVC = MainViewController()
+        mainVC.viewModel = MainViewModel()
         
 //        let detailViewModel = DetailViewModel()
 //        let mainVC = DetailViewController(viewModel: detailViewModel)
