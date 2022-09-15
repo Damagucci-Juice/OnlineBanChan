@@ -12,12 +12,12 @@ import RxSwift
 class MainViewModel: ViewModel {
     
     private let repository: OnbanRepository = OnbanRepositoryImpl()
-    private lazy var items: [[DishDTO]] = []
+    private lazy var items: [[DishDTO]?] = Array(repeating: nil, count: 3)
     var countOfSections: Int { return items.count }
     
     subscript(indexPath: IndexPath) -> DishDTO? {
         if isValid(indexPath: indexPath) {
-            return items[indexPath.section][indexPath.row]
+            return items[indexPath.section]?[indexPath.row]
         }
         return nil
     }
@@ -29,7 +29,7 @@ class MainViewModel: ViewModel {
     
     struct State {
         let openedDetailPage: () -> Void = { }
-        let reloadData = PublishRelay<Void>()
+        let reloadedSection = PublishRelay<Int>()
     }
     
     let action = Action()
@@ -38,21 +38,25 @@ class MainViewModel: ViewModel {
     
     init() {
         action.viewDidLoad
-            .bind(onNext: requestMain)
+            .bind(onNext: loadViewModels)
             .disposed(by: disposeBag)
     }
 }
 
 extension MainViewModel {
     
-    func requestMain() {
+    func loadViewModels() {
+        [.requestMainDish,
+         .requestSoup,
+         .requestSideDish].enumerated().forEach(requestMain)
+    }
+    
+    private func requestMain(_ index: Int, _ target: OnbanAPI) {
         Task {
-            let main = try await self.repository.reqeuestMain()
-            if main.error != nil { return }
-            guard let mainModel = main.value else { return }
-            let mainViewModel: [[DishDTO]] = mainModel
-            self.items = mainViewModel
-            self.state.reloadData.accept(())
+            let receive = try await self.repository.requestViewModel(target)
+            if receive.error != nil { return }
+            self.items[index] = receive.value ?? []
+            self.state.reloadedSection.accept(index)
         }
     }
 }
@@ -61,13 +65,13 @@ extension MainViewModel {
     private func isValid(indexPath: IndexPath) -> Bool {
         let section = indexPath.section
         let row = indexPath.row
-        if items.count > section && items[section].count > row {
+        if items.count > section && items[section]?.count ?? 0 > row {
             return true
         }
         return false
     }
     
     func getItemCount(of section: Int) -> Int {
-        return items[section].count
+        return items[section]?.count ?? 0
     }
 }

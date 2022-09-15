@@ -10,11 +10,11 @@ import RxCocoa
 import RxSwift
 
 final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    typealias ViewModel = MainViewModel
+
     private let disposeBag = DisposeBag()
     
     struct State {
-        var reloadData = PublishRelay<Void>()
+        var reloadSectionData = PublishRelay<Int>()
     }
     
     let state = State()
@@ -83,7 +83,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
             let itemCount = viewModel?.getItemCount(of: indexPath.section) ?? 0
             headerView.setup(by: indexPath.section, itemCount)
         default:
-            assert(false)
+            break
         }
         return headerView
     }
@@ -92,10 +92,8 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
 
 extension MainDatasource: View {
     func bind(to viewModel: MainViewModel) {
-        viewModel.state.reloadData
-            .bind { [weak self] in
-                self?.state.reloadData.accept(())
-            }
+        viewModel.state.reloadedSection
+            .bind(to: state.reloadSectionData)
             .disposed(by: disposeBag)
     }
 }

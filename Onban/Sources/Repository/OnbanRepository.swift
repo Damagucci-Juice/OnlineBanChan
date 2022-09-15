@@ -8,24 +8,57 @@
 import Foundation
 
 protocol OnbanRepository {
-    func reqeuestMain() async throws -> ApiResult<[[DishDTO]], SessionError>
+    func requestViewModel(_ target: OnbanAPI) async throws -> ApiResult<[DishDTO], SessionError>
+    func requestMain() async throws -> ApiResult<[DishDTO], SessionError>
+    func requestSoup() async throws -> ApiResult<[DishDTO], SessionError>
+    func requestSide() async throws -> ApiResult<[DishDTO], SessionError>
 }
 
 final class OnbanRepositoryImpl: NetworkRepositroy<OnbanAPI>, OnbanRepository {
-    func reqeuestMain() async throws -> ApiResult<[[DishDTO]], SessionError> {
-        let mainReceive = try await request(.requestMainDish)
-        let soupReceive = try await request(.requestSoup)
-        let sideReceive = try await request(.requestSideDish)
+    
+    func requestViewModel(_ target: OnbanAPI) async throws -> ApiResult<[DishDTO], SessionError> {
+        let receive = try await request(target)
+        let category = receive?.decode(CategoryDTO.self)
         
-        let results: [[DishDTO]] = [mainReceive, soupReceive, sideReceive].compactMap { receive in
-            let result = receive?.decode(CategoryDTO.self)
-            return result?.value?.body
-        }
-        
-        if results.count == 3 {
-            return ApiResult(value: results, error: nil)
+        if let dishes = category?.value?.body {
+            return ApiResult(value: dishes, error: nil)
         } else {
             return ApiResult(value: nil, error: .unknownError)
         }
     }
+    
+    
+    func requestSoup() async throws -> ApiResult<[DishDTO], SessionError> {
+        let receive = try await request(.requestSoup)
+        let category = receive?.decode(CategoryDTO.self)
+        
+        if let dishes = category?.value?.body {
+            return ApiResult(value: dishes, error: nil)
+        } else {
+            return ApiResult(value: nil, error: .unknownError)
+        }
+    }
+    
+    func requestSide() async throws -> ApiResult<[DishDTO], SessionError> {
+        let receive = try await request(.requestSideDish)
+        let category = receive?.decode(CategoryDTO.self)
+        
+        if let dishes = category?.value?.body {
+            return ApiResult(value: dishes, error: nil)
+        } else {
+            return ApiResult(value: nil, error: .unknownError)
+        }
+    }
+    
+    func requestMain() async throws -> ApiResult<[DishDTO], SessionError> {
+        let receive = try await request(.requestMainDish)
+        let category = receive?.decode(CategoryDTO.self)
+        
+        if let dishes = category?.value?.body {
+            return ApiResult(value: dishes, error: nil)
+        } else {
+            return ApiResult(value: nil, error: .unknownError)
+        }
+    }
+    
 }

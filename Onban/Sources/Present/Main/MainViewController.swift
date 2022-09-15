@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxRelay
 
 class MainViewController: UIViewController {
     
@@ -62,12 +63,11 @@ class MainViewController: UIViewController {
     }
     
     private func bind(_ dataSource: MainDatasource) {
-        dataSource.state.reloadData
-            .bind { [weak self] in
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                }
-            }
+        dataSource.state.reloadSectionData
+            .map { IndexSet(integer: $0) }
+            .observe(on: MainScheduler.asyncInstance)
+            .do { print($0) }
+            .bind(onNext: collectionView.reloadSections)
             .disposed(by: disposeBag)
     }
 }
