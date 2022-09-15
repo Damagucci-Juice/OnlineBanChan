@@ -48,7 +48,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = itemWidth(for: UIScreen.main.bounds.width, spacing: LayoutConstant.spacing)
+        let width = itemWidth(for: UIScreen.main.bounds.width, spacing: LayoutConstant.edgeSpacing)
         return CGSize(width: width, height: LayoutConstant.cellHeight)
     }
     
@@ -63,7 +63,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let width = itemWidth(for: UIScreen.main.bounds.width, spacing: LayoutConstant.spacing)
+        let width = itemWidth(for: UIScreen.main.bounds.width, spacing: LayoutConstant.edgeSpacing)
         return CGSize(width: width, height: LayoutConstant.sectionHeight)
     }
     

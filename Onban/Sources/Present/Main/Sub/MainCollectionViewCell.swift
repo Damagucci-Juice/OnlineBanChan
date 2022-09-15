@@ -15,7 +15,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleToFill
-        imageView.layer.cornerRadius = 10
+        imageView.layer.cornerRadius = LayoutConstant.cornerRadiusOfButton
         imageView.backgroundColor = UIColor.grey3
         return imageView
     }()
@@ -56,7 +56,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .equalSpacing
         horizontalStackView.alignment = .firstBaseline
-        horizontalStackView.spacing = 4
+        horizontalStackView.spacing = LayoutConstant.badgeSpacing
         return horizontalStackView
     }()
     
@@ -64,7 +64,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .equalSpacing
-        horizontalStackView.spacing = 8
+        horizontalStackView.spacing = LayoutConstant.interSpacing
         horizontalStackView.alignment = .firstBaseline
         return horizontalStackView
     }()
@@ -73,7 +73,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         let verticalStackView = UIStackView()
         verticalStackView.axis = .vertical
         verticalStackView.distribution = .equalSpacing
-        verticalStackView.spacing = 8
+        verticalStackView.spacing = LayoutConstant.interSpacing
         verticalStackView.alignment = .leading
         return verticalStackView
     }()
@@ -100,7 +100,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         }
         
         descriptionStackView.snp.makeConstraints {
-            $0.leading.equalTo(imageView.snp.trailing).offset(8)
+            $0.leading.equalTo(imageView.snp.trailing).offset(LayoutConstant.interSpacing)
             $0.trailing.equalToSuperview()
             $0.centerY.equalToSuperview()
         }

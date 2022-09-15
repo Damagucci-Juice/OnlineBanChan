@@ -103,7 +103,7 @@ class DetailViewController: UIViewController, View {
         
         pageControl.snp.makeConstraints { make in
             make.centerX.equalTo(imageScrollView.frameLayoutGuide)
-            make.bottom.equalTo(imageScrollView.frameLayoutGuide).inset(16)
+            make.bottom.equalTo(imageScrollView.frameLayoutGuide).inset(LayoutConstant.edgeSpacing)
         }
         
         informationView.snp.makeConstraints { make in
@@ -151,13 +151,11 @@ class DetailViewController: UIViewController, View {
             page.image = images[x]
             imageScrollView.addSubview(page)
             
-            //MARK: - 수정 필요, 실제 데이터를 보면서 해봐야하는 부분일듯
             let detailImage = UIImageView()
             detailImage.image = images[x]
             detailImage.contentMode = .scaleAspectFill
             containerStackView.addArrangedSubview(detailImage)
         }
-        
         
     }
     

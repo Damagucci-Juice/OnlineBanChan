@@ -54,7 +54,7 @@ class OrderView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
         stackView.alignment = .center
-        stackView.spacing = 24
+        stackView.spacing = LayoutConstant.spacingOfSection
         return stackView
     }()
     
@@ -84,7 +84,7 @@ class OrderView: UIView {
         button.setTitle("주문하기", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.textMediumBold
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = LayoutConstant.cornerRadiusOfButton
         button.isEnabled = true
         return button
     }()
@@ -111,8 +111,8 @@ class OrderView: UIView {
         totalPriceStackView.addArrangedSubViews(totalSubViews)
         
         amountStackView.snp.makeConstraints { make in
-            make.leading.top.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().inset(16)
+            make.leading.top.equalToSuperview().offset(LayoutConstant.edgeSpacing)
+            make.trailing.equalToSuperview().inset(LayoutConstant.edgeSpacing)
         }
         
         amountCountLabel.snp.makeConstraints { make in
@@ -121,29 +121,29 @@ class OrderView: UIView {
         
         stepper.snp.makeConstraints { make in
             make.width.lessThanOrEqualTo(95)
-            make.height.lessThanOrEqualTo(50)
+            make.height.lessThanOrEqualTo(LayoutConstant.buttonHeight)
         }
         
         amountCountBody.snp.makeConstraints { make in
             make.trailing.equalTo(stepper.snp.leading)
-            make.width.lessThanOrEqualTo(50)
+            make.width.lessThanOrEqualTo(LayoutConstant.buttonHeight)
         }
         
         midDividingLine.snp.makeConstraints { make in
-            make.height.equalTo(1)
+            make.height.equalTo(LayoutConstant.lineHeight)
             make.leading.trailing.equalTo(amountStackView)
-            make.top.equalTo(amountStackView.snp.bottom).offset(16)
+            make.top.equalTo(amountStackView.snp.bottom).offset(LayoutConstant.edgeSpacing)
         }
 
         totalPriceStackView.snp.makeConstraints { make in
-            make.top.equalTo(midDividingLine.snp.bottom).offset(16)
+            make.top.equalTo(midDividingLine.snp.bottom).offset(LayoutConstant.edgeSpacing)
             make.trailing.equalTo(amountStackView)
         }
 
         orderButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(amountStackView)
-            make.height.equalTo(50)
-            make.top.equalTo(totalPriceStackView.snp.bottom).offset(16)
+            make.height.equalTo(LayoutConstant.buttonHeight)
+            make.top.equalTo(totalPriceStackView.snp.bottom).offset(LayoutConstant.edgeSpacing)
         }
         
     }

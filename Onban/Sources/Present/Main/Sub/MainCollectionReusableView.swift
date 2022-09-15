@@ -39,7 +39,7 @@ final class MainCollectionReusableView: UICollectionReusableView {
         
         title.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(LayoutConstant.spacingOfSection)
-            $0.leading.trailing.equalToSuperview().inset(LayoutConstant.spacing)
+            $0.leading.trailing.equalToSuperview().inset(LayoutConstant.edgeSpacing)
         }
     }
     

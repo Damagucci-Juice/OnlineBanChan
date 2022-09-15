@@ -58,7 +58,7 @@ class InformationView: UIView {
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .equalSpacing
         horizontalStackView.alignment = .firstBaseline
-        horizontalStackView.spacing = 4
+        horizontalStackView.spacing = LayoutConstant.badgeSpacing
         return horizontalStackView
     }()
     
@@ -66,7 +66,7 @@ class InformationView: UIView {
         let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .equalSpacing
-        horizontalStackView.spacing = 8
+        horizontalStackView.spacing = LayoutConstant.interSpacing
         horizontalStackView.alignment = .firstBaseline
         return horizontalStackView
     }()
@@ -75,7 +75,7 @@ class InformationView: UIView {
         let verticalStackView = UIStackView()
         verticalStackView.axis = .vertical
         verticalStackView.distribution = .equalSpacing
-        verticalStackView.spacing = 8
+        verticalStackView.spacing = LayoutConstant.interSpacing
         verticalStackView.alignment = .leading
         return verticalStackView
     }()
@@ -135,7 +135,7 @@ class InformationView: UIView {
     private let titleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = LayoutConstant.interSpacing
         stackView.distribution = .equalSpacing
         stackView.alignment = .leading
         return stackView
@@ -144,7 +144,7 @@ class InformationView: UIView {
     private let bodyStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = LayoutConstant.interSpacing
         stackView.distribution = .equalSpacing
         stackView.alignment = .leading
         return stackView
@@ -171,31 +171,31 @@ class InformationView: UIView {
         bodyStackView.addArrangedSubViews(bodySubViews)
                 
         descriptionStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.top.equalToSuperview().offset(24)
+            $0.leading.equalToSuperview().offset(LayoutConstant.edgeSpacing)
+            $0.trailing.equalToSuperview().inset(LayoutConstant.edgeSpacing)
+            $0.top.equalToSuperview().offset(LayoutConstant.spacingOfSection)
         }
         
         midDividingLine.snp.makeConstraints {
-            $0.top.equalTo(descriptionStackView.snp.bottom).offset(24)
+            $0.top.equalTo(descriptionStackView.snp.bottom).offset(LayoutConstant.spacingOfSection)
             $0.leading.trailing.equalTo(descriptionStackView)
-            $0.height.equalTo(1)
+            $0.height.equalTo(LayoutConstant.lineHeight)
         }
         
         titleStackView.snp.makeConstraints {
             $0.leading.equalTo(descriptionStackView)
-            $0.top.equalTo(midDividingLine.snp.bottom).offset(24)
+            $0.top.equalTo(midDividingLine.snp.bottom).offset(LayoutConstant.spacingOfSection)
         }
         
         bodyStackView.snp.makeConstraints {
             $0.top.equalTo(titleStackView)
-            $0.leading.equalTo(titleStackView.snp.trailing).offset(16)
+            $0.leading.equalTo(titleStackView.snp.trailing).offset(LayoutConstant.edgeSpacing)
         }
         
         lastDividingLine.snp.makeConstraints {
-            $0.top.equalTo(titleStackView.snp.bottom).offset(24)
+            $0.top.equalTo(titleStackView.snp.bottom).offset(LayoutConstant.spacingOfSection)
             $0.leading.trailing.equalTo(descriptionStackView)
-            $0.height.equalTo(1)
+            $0.height.equalTo(LayoutConstant.lineHeight)
         }
     }
 }
