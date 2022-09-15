@@ -10,14 +10,6 @@ import SnapKit
 
 class OrderView: UIView {
     
-    private let containerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 24
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
-    
     private let amountStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -31,6 +23,7 @@ class OrderView: UIView {
         label.textColor = UIColor.grey2
         label.font = UIFont.textSmallRegular
         label.text = "수량"
+        label.sizeToFit()
         return label
     }()
     
@@ -39,6 +32,7 @@ class OrderView: UIView {
         label.textColor = UIColor.grey1
         label.font = UIFont.textMediumBold
         label.text = "1"
+        label.sizeToFit()
         return label
     }()
     
@@ -88,6 +82,7 @@ class OrderView: UIView {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.textMediumBold
         button.layer.cornerRadius = 10
+        button.isEnabled = true
         return button
     }()
     
@@ -103,11 +98,8 @@ class OrderView: UIView {
     }
     
     private func setupLayout() {
-        self.addSubview(containerStackView)
-        
         let outerSubViews = [amountStackView, midDividingLine, totalPriceStackView, orderButton]
-//        let outerSubViews = [amountStackView]
-        containerStackView.addArrangedSubViews(outerSubViews)
+        self.addSubViews(outerSubViews)
         
         let amountSubViews = [amountCountLabel, amountCountBody, stepper]
         amountStackView.addArrangedSubViews(amountSubViews)
@@ -115,12 +107,8 @@ class OrderView: UIView {
         let totalSubViews = [totalPriceLabel, totalPriceBody]
         totalPriceStackView.addArrangedSubViews(totalSubViews)
         
-        containerStackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
         amountStackView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.top.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().inset(16)
         }
         
@@ -129,32 +117,35 @@ class OrderView: UIView {
         }
         
         stepper.snp.makeConstraints { make in
-            make.width.equalTo(100)
+            make.width.lessThanOrEqualTo(100)
+            make.height.lessThanOrEqualTo(50)
         }
         
         amountCountBody.snp.makeConstraints { make in
             make.trailing.equalTo(stepper.snp.leading)
+            make.width.lessThanOrEqualTo(50)
         }
         
         midDividingLine.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.leading.trailing.equalTo(amountStackView)
+            make.top.equalTo(amountStackView.snp.bottom).offset(16)
         }
 
         totalPriceStackView.snp.makeConstraints { make in
+            make.top.equalTo(midDividingLine.snp.bottom).offset(16)
             make.trailing.equalTo(amountStackView)
         }
 
         orderButton.snp.makeConstraints { make in
             make.leading.trailing.equalTo(amountStackView)
             make.height.equalTo(50)
+            make.top.equalTo(totalPriceStackView.snp.bottom).offset(16)
         }
         
     }
     
     private func setupAttribute() {
-        self.backgroundColor = UIColor.brown
-        self.amountStackView.backgroundColor = UIColor.primary1
-        self.totalPriceStackView.backgroundColor = UIColor.grey4
+        self.backgroundColor = UIColor.white
     }
 }

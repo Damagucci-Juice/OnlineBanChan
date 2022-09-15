@@ -20,7 +20,7 @@ class InformationView: UIView {
         fatalError("This init shouldn't be used")
     }
     
-    private let title: UILabel = {
+    private(set) var title: UILabel = {
         let label = UILabel()
         label.font = UIFont.textLargeBold
         label.textColor = UIColor.black

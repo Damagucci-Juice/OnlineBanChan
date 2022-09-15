@@ -19,23 +19,16 @@ class DetailViewController: UIViewController, View {
         view.spacing = 0
         return view
     }()
-    //MARK: - 나중에 지울 것임
+    
     private let informationView: InformationView = {
         let view = InformationView(frame: .zero)
         return view
     }()
     
-    private let subview2: OrderView = {
+    private let orderView: OrderView = {
         let view = OrderView(frame: .zero)
         return view
     }()
-    
-    private let subview3: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.blue
-        return view
-    }()
-    //MARK: - 여기까지
     
     init(viewModel: ViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -54,7 +47,7 @@ class DetailViewController: UIViewController, View {
     }
     
     private func setLayout() {
-        let subViews = [informationView, subview2, subview3]
+        let subViews = [informationView, orderView]
         
         view.addSubview(scrollView)
         scrollView.addSubview(containerStackView)
@@ -68,20 +61,28 @@ class DetailViewController: UIViewController, View {
             $0.edges.equalToSuperview()
         }
         
-        subViews.forEach { view in
-            view.snp.makeConstraints {
-                $0.height.equalTo(400)
-                $0.width.equalTo(self.view.safeAreaLayoutGuide)
-            }
+        informationView.snp.makeConstraints { make in
+            make.height.equalTo(293)
+            make.width.equalTo(self.view.safeAreaLayoutGuide)
         }
         
+        orderView.snp.makeConstraints { make in
+            make.height.equalTo(200)
+            make.width.equalTo(self.view.safeAreaLayoutGuide)
+        }
     }
     
     private func setAttribute() {
-        
+        setupNavigation()
+        self.view.backgroundColor = UIColor.white
     }
     
     func bind(to viewModel: DetailViewModel) {
         // TODO: - 나중에 뷰모델 만들어지면 바인딩 할 것들.
+    }
+    
+    private func setupNavigation() {
+        self.navigationItem.title = self.informationView.title.text
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
 }
