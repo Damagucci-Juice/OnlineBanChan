@@ -95,7 +95,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         
         imageView.snp.makeConstraints {
             $0.leading.top.equalToSuperview()
-            $0.width.equalTo(130)
+            $0.width.equalTo(LayoutConstant.cellHeight)
             $0.height.equalTo(imageView.snp.width)
         }
         

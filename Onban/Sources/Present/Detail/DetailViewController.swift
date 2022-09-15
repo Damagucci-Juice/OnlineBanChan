@@ -25,7 +25,7 @@ class DetailViewController: UIViewController, View {
         return scrollView
     }()
     
-    //TODO: - 뷰모델이 추가되면 대체될 것들임
+    // TODO: - 뷰모델이 추가되면 대체될 것들임
     private let images: [UIImage?] = [
         UIImage(named: "meet.jpeg"),
         UIImage(named: "me.jpeg"),
@@ -59,7 +59,7 @@ class DetailViewController: UIViewController, View {
     }()
     
     private let orderView: OrderView = {
-        let view = OrderView(frame: .zero)
+        let view = OrderView(itemInformation: ItemTotalPriceAndAmount(price: 12640))
         return view
     }()
     
@@ -122,6 +122,7 @@ class DetailViewController: UIViewController, View {
         setupImageScrollView()
         setupPageControl()
         self.view.backgroundColor = UIColor.white
+        orderView.delegate = self
     }
     
     func bind(to viewModel: DetailViewModel) {
@@ -173,5 +174,11 @@ extension DetailViewController: UIScrollViewDelegate {
         pageControl.currentPage = Int(floorf(
             Float(imageScrollView.contentOffset.x) / Float(imageScrollView.frame.size.width)
         ))
+    }
+}
+
+extension DetailViewController: PaymentRequestResponder {
+    func requestPayment(_ itemInformation: ItemTotalPriceAndAmount) {
+        print("detailVC 에서 \(itemInformation.totalPirce)를 확인하였습니다.")
     }
 }

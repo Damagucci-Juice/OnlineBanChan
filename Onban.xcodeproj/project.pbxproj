@@ -38,6 +38,8 @@
 		0061690E28CEFE280047641E /* OnbanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690D28CEFE280047641E /* OnbanRepository.swift */; };
 		0061691028CF035B0047641E /* MVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061690F28CF035B0047641E /* MVVM.swift */; };
 		0061691228CF050E0047641E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0061691128CF050E0047641E /* MainViewModel.swift */; };
+		00D4321128D33C2B00DED7D5 /* ItemTotalPriceAndAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D4321028D33C2B00DED7D5 /* ItemTotalPriceAndAmount.swift */; };
+		00D4321428D343F200DED7D5 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D4321328D343F200DED7D5 /* Int+Extension.swift */; };
 		00D5CD4C28C8559A001DE12A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */; };
 		00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CD4D28C85758001DE12A /* PaddingLabel.swift */; };
 		00D5CD6428C85CF3001DE12A /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */; };
@@ -124,6 +126,8 @@
 		0061690D28CEFE280047641E /* OnbanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbanRepository.swift; sourceTree = "<group>"; };
 		0061690F28CF035B0047641E /* MVVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM.swift; sourceTree = "<group>"; };
 		0061691128CF050E0047641E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		00D4321028D33C2B00DED7D5 /* ItemTotalPriceAndAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTotalPriceAndAmount.swift; sourceTree = "<group>"; };
+		00D4321328D343F200DED7D5 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		00D5CD4B28C8559A001DE12A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		00D5CD4D28C85758001DE12A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		00D5CD6228C85CF3001DE12A /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 			children = (
 				006168EE28C989630047641E /* CategoryDTO.swift */,
 				006168F028C989D60047641E /* DishDTO.swift */,
+				00D4321028D33C2B00DED7D5 /* ItemTotalPriceAndAmount.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				006168A828C8CA440047641E /* UIStackView+Extension.swift */,
 				006168AA28C8CA670047641E /* UIView+Extension.swift */,
 				006168AC28C8CCDB0047641E /* UIReusableView+Extension.swift */,
+				00D4321328D343F200DED7D5 /* Int+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -711,6 +717,7 @@
 				006168A928C8CA440047641E /* UIStackView+Extension.swift in Sources */,
 				00F432D228C8340300557C58 /* MainViewController.swift in Sources */,
 				002F17A028D042E100E33D48 /* DetailViewModel.swift in Sources */,
+				00D4321428D343F200DED7D5 /* Int+Extension.swift in Sources */,
 				0061690328CEE78F0047641E /* OnbanAPI.swift in Sources */,
 				00D5CD4E28C85758001DE12A /* PaddingLabel.swift in Sources */,
 				0061690E28CEFE280047641E /* OnbanRepository.swift in Sources */,
@@ -727,6 +734,7 @@
 				006168AF28C8DE9B0047641E /* MainCollectionReusableView.swift in Sources */,
 				0033BC2228D20FC3005947EF /* OrderView.swift in Sources */,
 				006168FB28C999A80047641E /* ImageCacheType.swift in Sources */,
+				00D4321128D33C2B00DED7D5 /* ItemTotalPriceAndAmount.swift in Sources */,
 				0061691228CF050E0047641E /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

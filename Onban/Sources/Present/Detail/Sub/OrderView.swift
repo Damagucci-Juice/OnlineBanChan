@@ -8,7 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol PaymentRequestResponder: AnyObject {
+    func requestPayment(_ itemInformation: ItemTotalPriceAndAmount)
+}
+
 class OrderView: UIView {
+    
+    private var itemInformation: ItemTotalPriceAndAmount
+    
+    var delegate: PaymentRequestResponder?
     
     private let amountStackView: UIStackView = {
         let stackView = UIStackView()
@@ -31,7 +39,7 @@ class OrderView: UIView {
         let label = UILabel()
         label.textColor = UIColor.grey1
         label.font = UIFont.textMediumBold
-        label.text = "1"
+        label.text = "0"
         label.sizeToFit()
         return label
     }()
@@ -46,6 +54,12 @@ class OrderView: UIView {
         stepper.sizeToFit()
         return stepper
     }()
+    
+    @objc private func stepperDidChanged(_ sender: UIStepper) {
+        itemInformation.updateAmount(sender.value)
+        amountCountBody.text = String(itemInformation.amount)
+        totalPriceBody.text = String(itemInformation.totalPirce)
+    }
     
     private let midDividingLine = UIFactory.makeDividingLine()
     
@@ -74,10 +88,6 @@ class OrderView: UIView {
         return label
     }()
     
-    private let touchedButtonAction: UIAction = UIAction { _ in
-        print("button touched")
-    }
-    
     private let orderButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.primary2
@@ -89,8 +99,9 @@ class OrderView: UIView {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(itemInformation: ItemTotalPriceAndAmount) {
+        self.itemInformation = itemInformation
+        super.init(frame: .zero)
         setupLayout()
         setupAttribute()
     }
@@ -150,6 +161,14 @@ class OrderView: UIView {
     
     private func setupAttribute() {
         self.backgroundColor = UIColor.white
+        
+        let touchedButtonAction: UIAction = UIAction { _ in
+            self.delegate?.requestPayment(self.itemInformation)
+        }
+        
         orderButton.addAction(touchedButtonAction, for: .touchUpInside)
+        stepper.addTarget(self, action: #selector(stepperDidChanged(_:)), for: .valueChanged)
+        amountCountBody.text = String(itemInformation.amount)
+        totalPriceBody.text = String(itemInformation.totalPirce)
     }
 }
