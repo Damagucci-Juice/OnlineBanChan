@@ -38,7 +38,6 @@ class OrderView: UIView {
     
     private let stepper: UIStepper = {
         let stepper = UIStepper()
-        stepper.backgroundColor = UIColor.grey4
         stepper.isContinuous = false
         stepper.minimumValue = 1
         stepper.autorepeat = true
@@ -74,6 +73,10 @@ class OrderView: UIView {
         label.text = "10,000원"
         return label
     }()
+    
+    private let touchedButtonAction: UIAction = UIAction { _ in
+        print("button touched")
+    }
     
     private let orderButton: UIButton = {
         let button = UIButton()
@@ -117,7 +120,7 @@ class OrderView: UIView {
         }
         
         stepper.snp.makeConstraints { make in
-            make.width.lessThanOrEqualTo(100)
+            make.width.lessThanOrEqualTo(95)
             make.height.lessThanOrEqualTo(50)
         }
         
@@ -147,5 +150,6 @@ class OrderView: UIView {
     
     private func setupAttribute() {
         self.backgroundColor = UIColor.white
+        orderButton.addAction(touchedButtonAction, for: .touchUpInside)
     }
 }
