@@ -20,12 +20,17 @@ class MainViewController: UIViewController {
     }()
     
     private let dataSource = MainDatasource()
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAttribute()
         setupLayout()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disposeBag = DisposeBag()
     }
     
     private func setupAttribute() {
@@ -59,6 +64,13 @@ extension MainViewController: View {
         
         viewModel.state.items
             .bind(onNext: dataSource.updateItems)
+            .disposed(by: disposeBag)
+        
+        viewModel.state.items
+            .map { $0.0.rawValue }
+            .map { IndexSet(integer: $0) }
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(onNext: collectionView.reloadSections)
             .disposed(by: disposeBag)
     }
 }

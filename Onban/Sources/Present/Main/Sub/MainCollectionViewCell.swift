@@ -109,34 +109,34 @@ final class MainCollectionViewCell: UICollectionViewCell {
         }
     }
     
-//    func setup(_ dish: DishDTO) {
-//        guard let url = URL(string: dish.image) else { return }
-//        Task {
-//            imageView.image = await imageManager?.loadImage(url: url)
-//        }
-//        title.text = dish.title
-//        body.text = dish.bodyDescription
-//        reducedPrice.text = dish.reducedPrice
-//        originPrice.text = dish.originPrice
-//        eventStackView.addArrangedSubViews(UIFactory.makeEventBadges(dish.eventBadge))
-//    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
+        eventStackView.removeAllSubviews()
         self.disposeBag = DisposeBag()
-//        imageView.image = nil
-//        title.text = .none
-//        body.text = .none
-//        reducedPrice.text = .none
-//        originPrice.text = .none
-//        eventStackView.subviews.forEach {
-//            $0.removeFromSuperview()
-//        }
     }
 }
 
 extension MainCollectionViewCell: View {
     func bind(to viewModel: MainCellViewModel) {
-        <#code#>
+        viewModel.state.entityReady
+            .withUnretained(self)
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(onNext: { (cell, entity) in
+                cell.setupCellViews(entity)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.action.cellDidLoad.accept(())
+    }
+    
+    private func setupCellViews(_ entity: MainProductEntity) {
+        Task {
+            imageView.image = await imageManager?.loadImage(url: entity.imageAddress)
+            title.text = entity.title
+            body.text = entity.body
+            reducedPrice.text = entity.reducedPrice
+            originPrice.text = entity.originPrice
+            eventStackView.addArrangedSubViews(UIFactory.makeEventBadges(entity.eventBadge))
+        }
     }
 }

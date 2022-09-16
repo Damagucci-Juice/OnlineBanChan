@@ -44,7 +44,6 @@ final class LoginViewController: UIViewController, ASAuthorizationControllerDele
                                 Full Name is \(String(describing: fullName))
                                 Email id is \(String(describing: email))
                                 """
-            print(result)
             UserDefaults.standard.set(userIdentifier, forKey: "userID")
         }
     }

@@ -27,6 +27,23 @@ struct DishDTO: Codable {
         case reducedPrice = "s_price"
         case eventBadge = "badge"
     }
+    
+    func convertToEntity() -> MainProductEntity {
+        guard let url = URL(string: self.image) else {
+            assert(false)
+        }
+        
+        return MainProductEntity(
+            detailHash: self.detailHash,
+            imageAddress: url,
+            deliveryType: self.deliveryType,
+            title: self.title,
+            body: self.bodyDescription,
+            originPrice: self.originPrice,
+            reducedPrice: self.reducedPrice,
+            eventBadge: self.eventBadge
+        )
+    }
 }
 
 enum DeliveryType: String, Codable {

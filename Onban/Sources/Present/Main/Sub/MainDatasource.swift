@@ -11,8 +11,6 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
     
     private var items: [[MainCellViewModel]] = Array(repeating: [], count: CategoryType.allCases.count)
     
-    // MARK: - 숫자를 받았을 때 CategoryType 으로 변환해야한다.
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items[section].count
     }
@@ -78,7 +76,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
 }
 
 extension MainDatasource {
-    func updateItems(_ type: CategoryType  ,_ items: [MainCellViewModel]) {
+    func updateItems(_ type: CategoryType, items: [MainCellViewModel]) {
         self.items[type.index] = items
     }
 }

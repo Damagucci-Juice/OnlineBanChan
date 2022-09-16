@@ -12,15 +12,6 @@ import RxSwift
 class MainViewModel: ViewModel {
     
     private let repository: OnbanRepository = OnbanRepositoryImpl()
-//    private lazy var items: [[DishDTO]?] = Array(repeating: nil, count: 3)
-//    var countOfSections: Int { return items.count }
-    
-//    subscript(indexPath: IndexPath) -> DishDTO? {
-//        if isValid(indexPath: indexPath) {
-//            return items[indexPath.section]?[indexPath.row]
-//        }
-//        return nil
-//    }
     
     struct Action {
         let viewDidLoad = PublishRelay<Void>()
@@ -28,8 +19,6 @@ class MainViewModel: ViewModel {
     }
     
     struct State {
-//        let openedDetailPage: () -> Void = { }
-//        let reloadedSection = PublishRelay<Int>()
         let items = PublishRelay<(CategoryType, [MainCellViewModel])>()
     }
     
@@ -58,19 +47,4 @@ extension MainViewModel {
             self.state.items.accept((categoryType, item))
         }
     }
-}
-
-extension MainViewModel {
-//    private func isValid(indexPath: IndexPath) -> Bool {
-//        let section = indexPath.section
-//        let row = indexPath.row
-//        if items.count > section && items[section]?.count ?? 0 > row {
-//            return true
-//        }
-//        return false
-//    }
-    
-//    func getItemCount(of section: Int) -> Int {
-//        return items[section]?.count ?? 0
-//    }
 }
