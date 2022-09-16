@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import RxRelay
 
 final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private var items: [[MainCellViewModel]] = Array(repeating: [], count: CategoryType.allCases.count)
+    
+    struct State {
+        let readySection = PublishRelay<Int>()
+    }
+    
+    let state = State()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items[section].count
@@ -78,5 +85,8 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
 extension MainDatasource {
     func updateItems(_ type: CategoryType, items: [MainCellViewModel]) {
         self.items[type.index] = items
+        
+        state.readySection
+            .accept(type.index)
     }
 }

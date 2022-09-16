@@ -8,6 +8,14 @@
 import Foundation
 
 final class DetailViewModel: ViewModel {
+    
+    private let productInfo: Dish
+    private var detailProduct: DetailDish?
+    
+    init(productInfo: Dish) {
+        self.productInfo = productInfo
+    }
+    
     struct Action {
         
     }

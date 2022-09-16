@@ -63,16 +63,6 @@ class DetailViewController: UIViewController, View {
         return view
     }()
     
-    init(viewModel: ViewModel) {
-        super.init(nibName: nil, bundle: nil)
-        self.viewModel = viewModel
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("This initializer shouldn't be used.")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()

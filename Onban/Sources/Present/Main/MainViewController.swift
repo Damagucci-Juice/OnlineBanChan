@@ -66,11 +66,10 @@ extension MainViewController: View {
             .bind(onNext: dataSource.updateItems)
             .disposed(by: disposeBag)
         
-        viewModel.state.items
-            .map { $0.0.rawValue }
+        dataSource.state.readySection
             .map { IndexSet(integer: $0) }
             .observe(on: MainScheduler.asyncInstance)
-            .bind(onNext: collectionView.reloadSections)
+            .bind(onNext: self.collectionView.reloadSections)
             .disposed(by: disposeBag)
     }
 }

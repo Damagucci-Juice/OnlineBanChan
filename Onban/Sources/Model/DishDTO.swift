@@ -28,12 +28,12 @@ struct DishDTO: Codable {
         case eventBadge = "badge"
     }
     
-    func convertToEntity() -> MainProductEntity {
+    func convertToEntity() -> Dish {
         guard let url = URL(string: self.image) else {
             assert(false)
         }
         
-        return MainProductEntity(
+        return Dish(
             detailHash: self.detailHash,
             imageAddress: url,
             deliveryType: self.deliveryType,

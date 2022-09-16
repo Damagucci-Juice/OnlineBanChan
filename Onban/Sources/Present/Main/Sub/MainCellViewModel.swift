@@ -8,22 +8,27 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
+
 
 final class MainCellViewModel: ViewModel {
     
-    private let entity: MainProductEntity
+    private let repository = OnbanRepositoryImpl()
+    
+    private let entity: Dish
     private let disposeBag = DisposeBag()
     
     struct Action {
-        let cellDidLoad = PublishRelay<Void>()
+        let loadCell = PublishRelay<Void>()
+        var showDetailDish: (Dish) -> Void = { _ in }
     }
     
     struct State {
-        let entityReady = PublishRelay<MainProductEntity>()
+        let entityReady = PublishRelay<Dish>()
     }
     
-    let action: Action = Action()
-    let state: State = State()
+    var action = Action()
+    var state = State()
     
     init(_ dish: DishDTO) {
         self.entity = dish.convertToEntity()
@@ -31,7 +36,7 @@ final class MainCellViewModel: ViewModel {
     }
     
     private func bind() {
-        self.action.cellDidLoad
+        action.loadCell
             .map { self.entity }
             .bind(to: state.entityReady)
             .disposed(by: disposeBag)

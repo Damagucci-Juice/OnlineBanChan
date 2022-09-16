@@ -9,42 +9,57 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class MainViewModel: ViewModel {
+struct MainViewModelAction {
+    let viewDidLoad = PublishRelay<Void>()
+    var showDetail: (Dish) -> Void = { _ in }
+}
+
+final class MainViewModel: ViewModel {
     
     private let repository: OnbanRepository = OnbanRepositoryImpl()
     
-    struct Action {
-        let viewDidLoad = PublishRelay<Void>()
-        let touchedCell = PublishRelay<IndexPath>()
-    }
     
     struct State {
         let items = PublishRelay<(CategoryType, [MainCellViewModel])>()
     }
     
-    let action = Action()
+    let action: MainViewModelAction
     let state = State()
+    
     private let disposeBag = DisposeBag()
     
-    init() {
-        action.viewDidLoad
-            .bind(onNext: loadViewModels)
-            .disposed(by: disposeBag)
+    init(action: MainViewModelAction) {
+        self.action = action
+        bind()
     }
 }
 
 extension MainViewModel {
     
-    func loadViewModels() {
+    func loadItems() {
         CategoryType.allCases.enumerated().forEach(requestMain)
     }
     
     private func requestMain(_ index: Int, _ categoryType: CategoryType) {
-        Task {
-            let receive = try await self.repository.requestOnbanApi(categoryType)
+        Task { [unowned self] in
+            let receive = try await self.repository.requestItems(categoryType)
             if receive.error != nil { return }
             let item = (receive.value ?? []).map { MainCellViewModel($0) }
             self.state.items.accept((categoryType, item))
         }
+    }
+    
+    private func requestDetail(_ detailHash: String) {
+        Task {
+            let receive = try await self.repository.requestDetail(detailHash)
+            if receive.error != nil { return }
+            
+        }
+    }
+    
+    private func bind() {
+        action.viewDidLoad
+            .bind(onNext: loadItems)
+            .disposed(by: disposeBag)
     }
 }

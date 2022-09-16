@@ -81,16 +81,6 @@ final class MainCollectionViewCell: UICollectionViewCell {
         return verticalStackView
     }()
     
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("This initializer shouldn't be used")
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupLayout()
-    }
-    
     private func setupLayout() {
         contentView.addSubViews([imageView, descriptionStackView])
         priceStackView.addArrangedSubViews([reducedPrice, originPrice])
@@ -109,9 +99,19 @@ final class MainCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupLayout()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("This initializer shouldn't be used.")
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
-        eventStackView.removeAllSubviews()
+        self.eventStackView.removeAllSubviews()
         self.disposeBag = DisposeBag()
     }
 }
@@ -120,23 +120,22 @@ extension MainCollectionViewCell: View {
     func bind(to viewModel: MainCellViewModel) {
         viewModel.state.entityReady
             .withUnretained(self)
-            .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { (cell, entity) in
                 cell.setupCellViews(entity)
             })
             .disposed(by: disposeBag)
         
-        viewModel.action.cellDidLoad.accept(())
+        viewModel.action.loadCell.accept(())
     }
     
-    private func setupCellViews(_ entity: MainProductEntity) {
+    private func setupCellViews(_ entity: Dish) {
         Task {
             imageView.image = await imageManager?.loadImage(url: entity.imageAddress)
-            title.text = entity.title
-            body.text = entity.body
-            reducedPrice.text = entity.reducedPrice
-            originPrice.text = entity.originPrice
-            eventStackView.addArrangedSubViews(UIFactory.makeEventBadges(entity.eventBadge))
         }
+        title.text = entity.title
+        body.text = entity.body
+        reducedPrice.text = entity.reducedPrice
+        originPrice.text = entity.originPrice
+        eventStackView.addArrangedSubViews(UIFactory.makeEventBadges(entity.eventBadge))
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MainProductEntity {
+struct Dish {
     let detailHash: String
     let imageAddress: URL
     let deliveryType: [DeliveryType]
