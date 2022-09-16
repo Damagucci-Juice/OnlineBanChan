@@ -13,9 +13,7 @@ import RxCocoa
 
 final class MainCellViewModel: ViewModel {
     
-    private let repository = OnbanRepositoryImpl()
-    
-    private let entity: Dish
+    private(set) var entity: Dish
     private let disposeBag = DisposeBag()
     
     struct Action {

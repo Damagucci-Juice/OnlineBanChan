@@ -11,13 +11,12 @@ import RxSwift
 
 struct MainViewModelAction {
     let viewDidLoad = PublishRelay<Void>()
-    var showDetail: (Dish) -> Void = { _ in }
+    var showDetail: (Dish) -> Void
 }
 
 final class MainViewModel: ViewModel {
     
     private let repository: OnbanRepository = OnbanRepositoryImpl()
-    
     
     struct State {
         let items = PublishRelay<(CategoryType, [MainCellViewModel])>()

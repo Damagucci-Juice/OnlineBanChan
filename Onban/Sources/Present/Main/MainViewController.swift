@@ -71,5 +71,9 @@ extension MainViewController: View {
             .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: self.collectionView.reloadSections)
             .disposed(by: disposeBag)
+        
+        dataSource.state.didSelectedItem
+            .bind(onNext: viewModel.action.showDetail)
+            .disposed(by: disposeBag)
     }
 }

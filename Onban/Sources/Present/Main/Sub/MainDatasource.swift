@@ -14,6 +14,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
     
     struct State {
         let readySection = PublishRelay<Int>()
+        let didSelectedItem = PublishRelay<Dish>()
     }
     
     let state = State()
@@ -80,6 +81,12 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
         return headerView
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let dish = items[indexPath.section][indexPath.row].entity
+        
+        state.didSelectedItem
+            .accept(dish)
+    }
 }
 
 extension MainDatasource {
