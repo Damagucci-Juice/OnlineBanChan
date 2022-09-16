@@ -28,6 +28,13 @@ class MainViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let newViewModel = self.viewModel {
+            bind(to: newViewModel)
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         disposeBag = DisposeBag()
