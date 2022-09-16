@@ -9,14 +9,16 @@ import Foundation
 
 struct ItemTotalPriceAndAmount {
     let price: Int
+    
     private(set) var amount: Int = 1 {
         willSet {
             guard newValue > 0 else { return }
         }
     }
+    
     var totalPirce: String {
         let totalValue = price * amount
-        return totalValue.asPrice
+        return totalValue.asPriceString
     }
     
     mutating func updateAmount(_ value: Double) {

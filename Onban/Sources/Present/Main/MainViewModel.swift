@@ -48,14 +48,6 @@ extension MainViewModel {
         }
     }
     
-    private func requestDetail(_ detailHash: String) {
-        Task {
-            let receive = try await self.repository.requestDetail(detailHash)
-            if receive.error != nil { return }
-            
-        }
-    }
-    
     private func bind() {
         action.viewDidLoad
             .bind(onNext: loadItems)

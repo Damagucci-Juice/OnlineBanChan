@@ -10,6 +10,7 @@
 		002F179E28D0425A00E33D48 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F179D28D0425A00E33D48 /* DetailViewController.swift */; };
 		002F17A028D042E100E33D48 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002F179F28D042E100E33D48 /* DetailViewModel.swift */; };
 		0033BC2228D20FC3005947EF /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0033BC2128D20FC3005947EF /* OrderView.swift */; };
+		003D106328D4A77F00EA1A52 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003D106228D4A77F00EA1A52 /* String+Extension.swift */; };
 		005191D128D4041400FB8F8F /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005191D028D4041400FB8F8F /* Dish.swift */; };
 		005191D328D42F5900FB8F8F /* OnbanFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005191D228D42F5900FB8F8F /* OnbanFlowCoordinator.swift */; };
 		005191D528D4314D00FB8F8F /* OnbanSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005191D428D4314D00FB8F8F /* OnbanSceneDIContainer.swift */; };
@@ -105,6 +106,7 @@
 		002F179D28D0425A00E33D48 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		002F179F28D042E100E33D48 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		0033BC2128D20FC3005947EF /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
+		003D106228D4A77F00EA1A52 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		005191D028D4041400FB8F8F /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		005191D228D42F5900FB8F8F /* OnbanFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbanFlowCoordinator.swift; sourceTree = "<group>"; };
 		005191D428D4314D00FB8F8F /* OnbanSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnbanSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				006168AA28C8CA670047641E /* UIView+Extension.swift */,
 				006168AC28C8CCDB0047641E /* UIReusableView+Extension.swift */,
 				00D4321328D343F200DED7D5 /* Int+Extension.swift */,
+				003D106228D4A77F00EA1A52 /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				006168F528C9978D0047641E /* ImageManager.swift in Sources */,
 				006168EF28C989630047641E /* CategoryDTO.swift in Sources */,
 				0061690C28CEFAFC0047641E /* NetworkRepository.swift in Sources */,
+				003D106328D4A77F00EA1A52 /* String+Extension.swift in Sources */,
 				00D4321628D368F900DED7D5 /* MainCellViewModel.swift in Sources */,
 				006168A728C8BC670047641E /* MainCollectionViewCell.swift in Sources */,
 				00D4321828D371C000DED7D5 /* CategoryType.swift in Sources */,

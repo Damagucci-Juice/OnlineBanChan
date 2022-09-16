@@ -8,7 +8,7 @@
 import Foundation
 
 extension Int {
-    var asPrice: String {
+    var asPriceString: String {
         let stringArray = Array(String(self))
         var reversedResult: String = ""
         var count = 0

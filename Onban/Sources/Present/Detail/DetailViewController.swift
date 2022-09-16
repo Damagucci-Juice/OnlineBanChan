@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class DetailViewController: UIViewController, View {
+class DetailViewController: UIViewController {
     typealias ViewModel = DetailViewModel
     
     private let scrollView: UIScrollView = {
@@ -69,6 +69,12 @@ class DetailViewController: UIViewController, View {
         setAttribute()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let newViewModel = self.viewModel {
+            self.bind(to: newViewModel)
+        }
+    }
     private func setLayout() {
         
         view.addSubview(scrollView)
@@ -113,10 +119,6 @@ class DetailViewController: UIViewController, View {
         setupPageControl()
         self.view.backgroundColor = UIColor.white
         orderView.delegate = self
-    }
-    
-    func bind(to viewModel: DetailViewModel) {
-        // TODO: - 나중에 뷰모델 만들어지면 바인딩 할 것들.
     }
     
     private func setupNavigation() {
@@ -170,5 +172,11 @@ extension DetailViewController: UIScrollViewDelegate {
 extension DetailViewController: PaymentRequestResponder {
     func requestPayment(_ itemInformation: ItemTotalPriceAndAmount) {
         print("detailVC 에서 \(itemInformation.totalPirce)를 확인하였습니다.")
+    }
+}
+
+extension DetailViewController: View {
+    func bind(to viewModel: DetailViewModel) {
+        // TODO: - 뷰모델 바인딩이랑 그런거 해야한다. 
     }
 }
