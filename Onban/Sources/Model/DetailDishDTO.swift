@@ -32,28 +32,20 @@ struct DetailDishDTO: Codable {
     }
     
     func convertToEntity() -> DetailDish {
-        if self.prices.count == 1 {
-            return DetailDish(
-                title: nil,
-                body: self.productDescription,
-                thumbImages: self.thumbImages,
-                point: self.point.asPriceInt,
-                deliveryInfo: self.deliveryInfo,
-                deliveryFee: self.deliveryFee,
-                reducedPrice: self.prices[0].asPriceInt,
-                originPrice: nil
-            )
-        } else {
-            return DetailDish(
-                title: nil,
-                body: self.productDescription,
-                thumbImages: self.thumbImages,
-                point: self.point.asPriceInt,
-                deliveryInfo: self.deliveryInfo,
-                deliveryFee: self.deliveryFee,
-                reducedPrice: self.prices[1].asPriceInt,
-                originPrice: self.prices[0].asPriceInt
-            )
+        var detailDish = DetailDish(
+            title: nil,
+            body: self.productDescription,
+            thumbImages: self.thumbImages,
+            detailImages: self.detailSection,
+            point: self.point.asPriceInt,
+            deliveryInfo: self.deliveryInfo,
+            deliveryFee: self.deliveryFee,
+            reducedPrice: self.prices[0].asPriceInt
+        )
+        if self.prices.count == 2 {
+            detailDish.originPrice = self.prices[0].asPriceInt
+            detailDish.reducedPrice = self.prices[1].asPriceInt
         }
+        return detailDish
     }
 }

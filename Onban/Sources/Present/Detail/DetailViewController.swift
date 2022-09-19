@@ -7,9 +7,14 @@
 
 import UIKit
 import SnapKit
+import RxRelay
+import RxSwift
+import RxAppState
 
 class DetailViewController: UIViewController {
     typealias ViewModel = DetailViewModel
+    
+    private let imageManager = ImageManager.shared
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -59,7 +64,7 @@ class DetailViewController: UIViewController {
     }()
     
     private let orderView: OrderView = {
-        let view = OrderView(itemInformation: ItemTotalPriceAndAmount(price: 12640))
+        let view = OrderView(itemInformation: ItemTotalPriceAndAmount())
         return view
     }()
     
@@ -68,6 +73,8 @@ class DetailViewController: UIViewController {
         setLayout()
         setAttribute()
     }
+    
+    private let disposeBag = DisposeBag()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -172,11 +179,22 @@ extension DetailViewController: UIScrollViewDelegate {
 extension DetailViewController: PaymentRequestResponder {
     func requestPayment(_ itemInformation: ItemTotalPriceAndAmount) {
         print("detailVC 에서 \(itemInformation.totalPirce)를 확인하였습니다.")
+        viewModel?.action.requestPayment.accept(())
     }
 }
 
 extension DetailViewController: View {
     func bind(to viewModel: DetailViewModel) {
-        // TODO: - 뷰모델 바인딩이랑 그런거 해야한다. 
+        rx.viewDidLoad
+            .bind(to: viewModel.action.loadDetail)
+            .disposed(by: disposeBag)
+        
+        viewModel.state.readyViewModel
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(onNext: { [unowned self] in
+                self.informationView.setupInformations(viewModel)
+                self.orderView.updateItemInformation(viewModel.reducedPrice)
+            })
+            .disposed(by: disposeBag)
     }
 }

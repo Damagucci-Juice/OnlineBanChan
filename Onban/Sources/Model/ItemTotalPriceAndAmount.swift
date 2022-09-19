@@ -8,7 +8,7 @@
 import Foundation
 
 struct ItemTotalPriceAndAmount {
-    let price: Int
+    var price: Int = 0
     
     private(set) var amount: Int = 1 {
         willSet {

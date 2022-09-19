@@ -171,4 +171,10 @@ class OrderView: UIView {
         amountCountBody.text = String(itemInformation.amount)
         totalPriceBody.text = String(itemInformation.totalPirce)
     }
+    
+    func updateItemInformation(_ price: Int) {
+        self.itemInformation.price = price
+        amountCountBody.text = String(itemInformation.amount)
+        totalPriceBody.text = String(itemInformation.totalPirce)
+    }
 }

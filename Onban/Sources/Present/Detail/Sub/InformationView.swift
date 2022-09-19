@@ -199,3 +199,16 @@ class InformationView: UIView {
         }
     }
 }
+
+extension InformationView {
+    func setupInformations(_ viewModel: DetailViewModel) {
+        self.title.text = viewModel.title
+        self.body.text = viewModel.body
+        self.originPrice.text = viewModel.originPrice?.asPriceString
+        self.reducedPrice.text = viewModel.reducedPrice.asPriceString
+        self.deliveryChargeValue.text = viewModel.deliveryCharge
+        self.deliveryInfomationValue.text = viewModel.deliveryInfo
+        self.savedMoneyValue.text = viewModel.savedMoney.asPriceString
+        self.eventStackView.addArrangedSubViews(UIFactory.makeEventBadges(viewModel.events))
+    }
+}

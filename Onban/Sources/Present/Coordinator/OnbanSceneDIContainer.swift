@@ -43,6 +43,6 @@ extension OnbanSceneDIContainer: OnbanFlowCoordinatorDependencies {
     }
     
     func makeDetailViewModel(with dish: Dish) -> DetailViewModel {
-        return DetailViewModel(productInfo: dish)
+        return DetailViewModel(productInfo: dish, repository: makeOnbanRepository())
     }
 }
