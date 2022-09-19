@@ -83,9 +83,7 @@ final class MainDatasource: NSObject, UICollectionViewDataSource, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let dish = items[indexPath.section][indexPath.row].entity
-        
-        state.didSelectedItem
-            .accept(dish)
+        state.didSelectedItem.accept(dish)
     }
 }
 

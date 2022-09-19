@@ -16,7 +16,7 @@ struct MainViewModelAction {
 
 final class MainViewModel: ViewModel {
     
-    private let repository: OnbanRepository = OnbanRepositoryImpl()
+    private let repository: OnbanRepository
     
     struct State {
         let items = PublishRelay<(CategoryType, [MainCellViewModel])>()
@@ -27,8 +27,9 @@ final class MainViewModel: ViewModel {
     
     private let disposeBag = DisposeBag()
     
-    init(action: MainViewModelAction) {
+    init(action: MainViewModelAction, repository: OnbanRepository) {
         self.action = action
+        self.repository = repository
         bind()
     }
 }

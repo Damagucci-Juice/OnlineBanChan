@@ -10,7 +10,6 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-
 final class MainCellViewModel: ViewModel {
     
     private(set) var entity: Dish
@@ -18,7 +17,6 @@ final class MainCellViewModel: ViewModel {
     
     struct Action {
         let loadCell = PublishRelay<Void>()
-        var showDetailDish: (Dish) -> Void = { _ in }
     }
     
     struct State {

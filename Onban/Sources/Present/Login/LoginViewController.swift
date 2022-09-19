@@ -45,6 +45,7 @@ final class LoginViewController: UIViewController, ASAuthorizationControllerDele
                                 Email id is \(String(describing: email))
                                 """
             UserDefaults.standard.set(userIdentifier, forKey: "userID")
+            print(result)
         }
     }
     

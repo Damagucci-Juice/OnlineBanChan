@@ -11,7 +11,10 @@ final class OnbanFlowCoordinator {
     private weak var navigationController: UINavigationController?
     private let dependencies: OnbanFlowCoordinatorDependencies
     
-    init(navigationController: UINavigationController, dependencies: OnbanFlowCoordinatorDependencies) {
+    private weak var mainVC: MainViewController?
+    
+    init(navigationController: UINavigationController,
+         dependencies: OnbanFlowCoordinatorDependencies) {
         self.navigationController = navigationController
         self.dependencies = dependencies
     }

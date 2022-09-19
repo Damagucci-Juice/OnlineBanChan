@@ -31,7 +31,6 @@ struct DetailDishDTO: Codable {
         case detailSection = "detail_section"
     }
     
-
     func convertToEntity() -> DetailDish {
         if self.prices.count == 1 {
             return DetailDish(

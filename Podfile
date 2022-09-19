@@ -19,6 +19,7 @@ target 'Onban' do
   pod 'SwiftLint'
   pod 'Toaster'
   pod 'RxAppState'
+  pod 'Kingfisher', '~> 7.0'
 
   # Pods for Onban
 

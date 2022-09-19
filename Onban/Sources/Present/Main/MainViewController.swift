@@ -19,6 +19,8 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     
+    private var isPresentedBefore = false
+    
     private let dataSource = MainDatasource()
     private var disposeBag = DisposeBag()
     
@@ -30,14 +32,16 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let newViewModel = self.viewModel {
-            bind(to: newViewModel)
+        if isPresentedBefore,
+            let viewModel = viewModel {
+            bind(to: viewModel)
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         disposeBag = DisposeBag()
+        isPresentedBefore = true
     }
     
     private func setupAttribute() {
@@ -64,6 +68,7 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: View {
+    
     func bind(to viewModel: MainViewModel) {
         rx.viewDidLoad
             .bind(to: viewModel.action.viewDidLoad)

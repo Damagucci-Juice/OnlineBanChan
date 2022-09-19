@@ -35,7 +35,7 @@ final class CacheManager {
         return cache
     }()
     
-    private lazy var cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
+//    private lazy var cachesDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
     
     init(config: Config = Config.defaultConfig) {
         self.config = config
@@ -73,11 +73,6 @@ extension CacheManager: ImageCacheType {
         let imageName = url.lastPathComponent as NSString
         imageCache.removeObject(forKey: imageName)
         decodedImageCache.removeObject(forKey: imageName)
-        do {
-            try FileManager.default.removeItem(at: url)
-        } catch {
-            assert(false)
-        }
     }
     
     func removeAllImages() {

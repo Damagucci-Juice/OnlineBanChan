@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Kingfisher
 
 final class MainCollectionViewCell: UICollectionViewCell {
     
@@ -124,14 +125,16 @@ extension MainCollectionViewCell: View {
                 cell.setupCellViews(entity)
             })
             .disposed(by: disposeBag)
-        
+
         viewModel.action.loadCell.accept(())
     }
     
     private func setupCellViews(_ entity: Dish) {
+        self.imageView.image = nil
         Task {
             imageView.image = await imageManager?.loadImage(url: entity.imageAddress)
         }
+        
         title.text = entity.title
         body.text = entity.body
         reducedPrice.text = entity.reducedPrice
