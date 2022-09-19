@@ -30,13 +30,6 @@ class DetailViewController: UIViewController {
         return scrollView
     }()
     
-    // TODO: - 뷰모델이 추가되면 대체될 것들임
-    private let images: [UIImage?] = [
-        UIImage(named: "meet.jpeg"),
-        UIImage(named: "me.jpeg"),
-        UIImage(named: "mockImage.png")
-    ]
-    
     private let containerStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -123,7 +116,6 @@ class DetailViewController: UIViewController {
     private func setAttribute() {
         setupNavigation()
         setupImageScrollView()
-        setupPageControl()
         self.view.backgroundColor = UIColor.white
         orderView.delegate = self
     }
@@ -137,31 +129,15 @@ class DetailViewController: UIViewController {
         imageScrollView.delegate = self
         imageScrollView.showsHorizontalScrollIndicator = false
         imageScrollView.contentSize = CGSize(
-            width: view.frame.size.width * CGFloat(images.count),
+            width: view.frame.size.width * CGFloat(2),
             height: imageScrollView.frame.size.height
         )
         imageScrollView.isPagingEnabled = true
-        
-        for x in 0..<images.count {
-            let page = UIImageView(frame: CGRect(
-                x: CGFloat(x) * view.frame.size.width,
-                y: 0,
-                width: view.frame.size.width,
-                height: view.frame.size.width))
-            page.image = images[x]
-            imageScrollView.addSubview(page)
-            
-            let detailImage = UIImageView()
-            detailImage.image = images[x]
-            detailImage.contentMode = .scaleAspectFill
-            containerStackView.addArrangedSubview(detailImage)
-        }
-        
     }
     
-    private func setupPageControl() {
+    private func setupPageControl(_ pages: Int) {
         imageScrollView.bringSubviewToFront(pageControl)
-        pageControl.numberOfPages = images.count
+        pageControl.numberOfPages = pages
         pageControl.addTarget(self,
                               action: #selector(pageControlDidChanged(_:)),
                               for: .valueChanged)
@@ -194,7 +170,69 @@ extension DetailViewController: View {
             .bind(onNext: { [unowned self] in
                 self.informationView.setupInformations(viewModel)
                 self.orderView.updateItemInformation(viewModel.reducedPrice)
+                Task {
+                    await self.updateBannerImages(viewModel)
+                    await self.updateExampleImages(viewModel)
+                }
             })
             .disposed(by: disposeBag)
+    }
+}
+
+extension DetailViewController {
+    
+    private func updateBannerImages(_ viewModel: DetailViewModel) async {
+        let bannerURLs = viewModel.bannerImages
+        let banners = await withTaskGroup(of: UIImage?.self, returning: [UIImage?].self) { taskGroup in
+            for bannerURL in bannerURLs {
+                taskGroup.addTask { await self.imageManager.loadImage(url: bannerURL) }
+            }
+            
+            var images: [UIImage?] = []
+            for await result in taskGroup {
+                images.append(result)
+            }
+            return images
+        }
+        
+        for x in 0..<banners.count {
+            let page = UIImageView(frame: CGRect(
+                x: CGFloat(x) * view.frame.size.width,
+                y: 0,
+                width: view.frame.size.width,
+                height: view.frame.size.width))
+            page.image = banners[x]
+            Task {
+                imageScrollView.addSubview(page)
+            }
+        }
+        setupPageControl(banners.count)
+    }
+    
+    private func updateExampleImages(_ viewModel: DetailViewModel) async {
+        let exampleURLs = viewModel.exampleImages
+        
+        let examples = await withTaskGroup(of: UIImage?.self, returning: [UIImage?].self) { taskGroup in
+            for exampleURL in exampleURLs {
+                taskGroup.addTask { await self.imageManager.loadImage(url: exampleURL) }
+            }
+            
+            var images: [UIImage?] = []
+            for await result in taskGroup {
+                images.append(result)
+            }
+            return images
+        }
+        
+        for image in examples {
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFit
+            // TODO: - 이미지의 사이즈를 화면 사이즈에 맞추기
+            Task {
+                imageView.image = image
+                containerStackView.addArrangedSubview(imageView)
+            }
+            
+        }
     }
 }

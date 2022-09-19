@@ -23,8 +23,8 @@ final class DetailViewModel: ViewModel {
     private(set) var savedMoney: Int = 0
     private(set) var deliveryInfo: String = ""
     private(set) var deliveryCharge: String = ""
-    private(set) var bannerImages: [String] = []
-    private(set) var exampleImages: [String] = []
+    private(set) var bannerImages: [URL] = []
+    private(set) var exampleImages: [URL] = []
     
     init(productInfo: Dish, repository: OnbanRepository) {
         self.repository = repository
@@ -46,7 +46,6 @@ final class DetailViewModel: ViewModel {
     let action = Action()
     let state = State()
     
-    // TODO: - requestDetail 이 완료되면 state.readyViewModel 로 값을 보낼 수 있는 방법 조사
     private func bind() {
         action.loadDetail
             .map { self.detailHash }
@@ -73,8 +72,8 @@ final class DetailViewModel: ViewModel {
         self.originPrice = object.originPrice ?? 0
         self.deliveryInfo = object.deliveryInfo
         self.deliveryCharge = object.deliveryFee
-        self.bannerImages = object.thumbImages
-        self.exampleImages = object.detailImages
         self.savedMoney = object.point
+        self.bannerImages = object.thumbImages.compactMap { URL(string: $0) }
+        self.exampleImages = object.detailImages.compactMap { URL(string: $0) }
     }
 }

@@ -202,6 +202,8 @@ class InformationView: UIView {
 
 extension InformationView {
     func setupInformations(_ viewModel: DetailViewModel) {
+        self.eventStackView.removeAllSubviews()
+        
         self.title.text = viewModel.title
         self.body.text = viewModel.body
         self.originPrice.text = viewModel.originPrice?.asPriceString
