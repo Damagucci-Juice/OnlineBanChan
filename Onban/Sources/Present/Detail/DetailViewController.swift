@@ -242,10 +242,13 @@ extension DetailViewController {
         }
         
         for image in examples {
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+            let imageView = UIImageView(frame: .zero)
             imageView.contentMode = .scaleAspectFit
             // TODO: - 이미지의 사이즈를 화면 사이즈에 맞추기
-            imageView.image = image
+            imageView.image = image?.resize(
+                withSize: CGSize(width: view.frame.width,
+                                 height: view.frame.width),
+                contentMode: .contentAspectFit)
             exampleImageStackView.addArrangedSubview(imageView)
         }
     }
