@@ -9,7 +9,7 @@ import Foundation
 
 struct ItemTotalPriceAndAmount {
     
-    let detailHash: String 
+    let detailHash: String
     let title: String
     let price: Int
     
@@ -26,5 +26,18 @@ struct ItemTotalPriceAndAmount {
     
     mutating func updateAmount(_ value: Double) {
         amount = Int(value)
+    }
+    
+    func converToOrder() -> Payload {
+        return Payload(
+            channel: "#모바일ios-generic",
+            userName: "webhookbot",
+            text: """
+                음식: \(title),
+                가격: \(price),
+                수량: \(amount)
+                """,
+            iconEmoji: ":ghost:"
+        )
     }
 }

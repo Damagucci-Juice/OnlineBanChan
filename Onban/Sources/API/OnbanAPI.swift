@@ -13,14 +13,16 @@ enum OnbanAPI {
     case requestSideDish
     case requestSoup
     case requestDetail(datailHash: String)
-    case requestPayment
+    case requestPayment(order: Payload)
 }
 
 extension OnbanAPI: BaseAPI {
     var baseURL: URL {
         switch self {
         case .requestPayment:
-            return URL(string: "https://hooks.slack.com/services/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")!
+            let url = "https://hooks.slack.com/services/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"
+            let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            return URL(string: encoded)!
         default:
             return URL(string: "https://api.codesquad.kr/onban/")!
         }
@@ -49,10 +51,12 @@ extension OnbanAPI: BaseAPI {
     }
     
     // TODO: - Body 사용법 학습 필요
-    var body: [String: Any]? {
+    var body: Data? {
         switch self {
-        case .requestPayment:
-            return [:]
+        case .requestPayment(let payload):
+            let thing = "payload={\"channel\": \"#모바일ios-generic\", \"username\": \"\(payload.userName)\", \"text\": \"\(payload.text)\", \"icon_emoji\": \":ghost:\"}"
+            return thing.data(using: .utf8)
+            
         default:
             return nil
         }

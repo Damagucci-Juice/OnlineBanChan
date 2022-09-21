@@ -12,5 +12,5 @@ protocol BaseAPI {
     var parameter: [String: Any]? { get }
     var path: String? { get }
     var method: String { get }
-    var body: [String: Any]? { get }
+    var body: Data? { get }
 }

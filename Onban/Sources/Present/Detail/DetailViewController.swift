@@ -10,6 +10,7 @@ import SnapKit
 import RxRelay
 import RxSwift
 import RxAppState
+import Toaster
 
 class DetailViewController: UIViewController {
     typealias ViewModel = DetailViewModel
@@ -191,6 +192,13 @@ extension DetailViewController: View {
             .withUnretained(self)
             .compactMap { _ in self.orderView.itemInformation }
             .bind(to: viewModel.action.requestPayment)
+            .disposed(by: disposeBag)
+        
+        viewModel.state.successPayment
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(onNext: { _ in
+                Toast(text: "결제가 완료되었습니다.").start()
+            })
             .disposed(by: disposeBag)
     }
 }

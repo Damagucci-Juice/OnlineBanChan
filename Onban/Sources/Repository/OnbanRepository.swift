@@ -10,6 +10,7 @@ import Foundation
 protocol OnbanRepository {
     func requestItems(_ type: CategoryType) async throws -> ApiResult<[DishDTO], SessionError>
     func requestDetail(_ detailHash: String) async throws -> ApiResult<DetailDishDTO, SessionError>
+    func requestPayment(_ info: ItemTotalPriceAndAmount) async throws -> ApiResult<Bool, SessionError>
 }
 
 final class OnbanRepositoryImpl: NetworkRepositroy<OnbanAPI>, OnbanRepository {
@@ -35,4 +36,13 @@ final class OnbanRepositoryImpl: NetworkRepositroy<OnbanAPI>, OnbanRepository {
         }
     }
 
+    func requestPayment(_ info: ItemTotalPriceAndAmount) async throws -> ApiResult<Bool, SessionError> {
+        let receive = try await request(.requestPayment(order: info.converToOrder()))
+        
+        if receive?.error == nil {
+            return ApiResult(value: true)
+        } else {
+            return ApiResult(value: nil, error: .unknownError)
+        }
+    }
 }

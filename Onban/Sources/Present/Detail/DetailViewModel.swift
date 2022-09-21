@@ -41,6 +41,7 @@ final class DetailViewModel: ViewModel {
     
     struct State {
         let readyViewModel = PublishRelay<Void>()
+        let successPayment = PublishRelay<Void>()
     }
     
     let action = Action()
@@ -53,10 +54,7 @@ final class DetailViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         action.requestPayment
-            .bind { info in
-                print(info)
-                print("here is DetailVM")
-            }
+            .bind(onNext: requestPayment)
             .disposed(by: disposeBag)
     }
     
@@ -69,6 +67,16 @@ final class DetailViewModel: ViewModel {
                 setup(with: detail)
                 
                 self.state.readyViewModel.accept(())
+            }
+        }
+    }
+    
+    private func requestPayment(_ item: ItemTotalPriceAndAmount) {
+        Task {
+            let receive = try await repository.requestPayment(item)
+            if receive.error != nil { return }
+            if receive.value == true {
+                state.successPayment.accept(())
             }
         }
     }

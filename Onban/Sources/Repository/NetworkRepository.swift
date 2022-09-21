@@ -19,10 +19,8 @@ class NetworkRepositroy<API: BaseAPI> {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = target.method
         if let body = target.body {
-            let json = try JSONSerialization.data(withJSONObject: body, options: [])
-            urlRequest.httpBody = json
+            urlRequest.httpBody = body
         }
-        
         return try await provider?.dataTask(request: urlRequest)
     }
 }
