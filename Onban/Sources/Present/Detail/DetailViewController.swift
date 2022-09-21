@@ -138,8 +138,9 @@ class DetailViewController: UIViewController {
     }
     
     private func setupNavigation() {
-        self.navigationItem.title = self.viewModel?.title
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationItem.title = self.viewModel?.title
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "뒤로")
     }
     
     private func setupImageScrollView() {
