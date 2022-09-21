@@ -8,7 +8,10 @@
 import Foundation
 
 struct ItemTotalPriceAndAmount {
-    var price: Int = 0
+    
+    let detailHash: String 
+    let title: String
+    let price: Int
     
     private(set) var amount: Int = 1 {
         willSet {

@@ -67,7 +67,7 @@ class DetailViewController: UIViewController {
     }()
     
     private let orderView: OrderView = {
-        let view = OrderView(itemInformation: ItemTotalPriceAndAmount())
+        let view = OrderView()
         return view
     }()
     
@@ -134,7 +134,6 @@ class DetailViewController: UIViewController {
         setupNavigation()
         setupImageScrollView()
         self.view.backgroundColor = UIColor.white
-        orderView.delegate = self
     }
     
     private func setupNavigation() {
@@ -170,13 +169,6 @@ extension DetailViewController: UIScrollViewDelegate {
     }
 }
 
-extension DetailViewController: PaymentRequestResponder {
-    func requestPayment(_ itemInformation: ItemTotalPriceAndAmount) {
-        print("detailVC 에서 \(itemInformation.totalPirce)를 확인하였습니다.")
-        viewModel?.action.requestPayment.accept(())
-    }
-}
-
 extension DetailViewController: View {
     func bind(to viewModel: DetailViewModel) {
         rx.viewDidLoad
@@ -187,12 +179,18 @@ extension DetailViewController: View {
             .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { [unowned self] in
                 self.informationView.setupInformations(viewModel)
-                self.orderView.updateItemInformation(viewModel.reducedPrice)
+                self.orderView.updateItemInformation(viewModel)
                 Task {
                     await self.updateBannerImages(viewModel)
                     await self.updateExampleImages(viewModel)
                 }
             })
+            .disposed(by: disposeBag)
+        
+        orderView.orderButton.rx.tap
+            .withUnretained(self)
+            .compactMap { _ in self.orderView.itemInformation }
+            .bind(to: viewModel.action.requestPayment)
             .disposed(by: disposeBag)
     }
 }

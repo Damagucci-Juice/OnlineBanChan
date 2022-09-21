@@ -7,16 +7,11 @@
 
 import UIKit
 import SnapKit
-
-protocol PaymentRequestResponder: AnyObject {
-    func requestPayment(_ itemInformation: ItemTotalPriceAndAmount)
-}
+import RxRelay
 
 class OrderView: UIView {
     
-    private var itemInformation: ItemTotalPriceAndAmount
-    
-    var delegate: PaymentRequestResponder?
+    private(set) var itemInformation: ItemTotalPriceAndAmount?
     
     private let amountStackView: UIStackView = {
         let stackView = UIStackView()
@@ -55,7 +50,11 @@ class OrderView: UIView {
     }()
     
     @objc private func stepperDidChanged(_ sender: UIStepper) {
+        guard var itemInformation = itemInformation else {
+            return
+        }
         itemInformation.updateAmount(sender.value)
+        self.itemInformation = itemInformation
         amountCountBody.text = String(itemInformation.amount)
         totalPriceBody.text = String(itemInformation.totalPirce)
     }
@@ -86,7 +85,7 @@ class OrderView: UIView {
         return label
     }()
     
-    private let orderButton: UIButton = {
+    private(set) var orderButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.primary2
         button.setTitle("주문하기", for: .normal)
@@ -97,8 +96,7 @@ class OrderView: UIView {
         return button
     }()
     
-    init(itemInformation: ItemTotalPriceAndAmount) {
-        self.itemInformation = itemInformation
+    init() {
         super.init(frame: .zero)
         setupLayout()
         setupAttribute()
@@ -159,19 +157,14 @@ class OrderView: UIView {
     
     private func setupAttribute() {
         self.backgroundColor = UIColor.white
-        
-        let touchedButtonAction: UIAction = UIAction { _ in
-            self.delegate?.requestPayment(self.itemInformation)
-        }
-        
-        orderButton.addAction(touchedButtonAction, for: .touchUpInside)
         stepper.addTarget(self, action: #selector(stepperDidChanged(_:)), for: .valueChanged)
-        amountCountBody.text = String(itemInformation.amount)
-        totalPriceBody.text = String(itemInformation.totalPirce)
     }
     
-    func updateItemInformation(_ price: Int) {
-        self.itemInformation.price = price
+    func updateItemInformation(_ viewModel: DetailViewModel) {
+        self.itemInformation = ItemTotalPriceAndAmount(detailHash: viewModel.detailHash,
+                                                       title: viewModel.title,
+                                                       price: viewModel.reducedPrice)
+        guard let itemInformation = itemInformation else { return }
         amountCountBody.text = String(itemInformation.amount)
         totalPriceBody.text = String(itemInformation.totalPirce)
     }

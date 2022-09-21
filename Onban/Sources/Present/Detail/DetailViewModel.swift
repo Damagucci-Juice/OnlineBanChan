@@ -35,7 +35,7 @@ final class DetailViewModel: ViewModel {
     }
     
     struct Action {
-        let requestPayment = PublishRelay<Void>()
+        let requestPayment = PublishRelay<ItemTotalPriceAndAmount>()
         let loadDetail = PublishRelay<Void>()
     }
     
@@ -50,6 +50,13 @@ final class DetailViewModel: ViewModel {
         action.loadDetail
             .map { self.detailHash }
             .bind(onNext: requestDetail)
+            .disposed(by: disposeBag)
+        
+        action.requestPayment
+            .bind { info in
+                print(info)
+                print("here is DetailVM")
+            }
             .disposed(by: disposeBag)
     }
     
