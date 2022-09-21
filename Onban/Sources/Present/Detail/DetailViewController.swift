@@ -201,6 +201,7 @@ extension DetailViewController {
     
     private func updateBannerImages(_ viewModel: DetailViewModel) async {
         let bannerURLs = viewModel.bannerImages
+
         let banners = await withTaskGroup(of: UIImage?.self, returning: [UIImage?].self) { taskGroup in
             for bannerURL in bannerURLs {
                 taskGroup.addTask { await self.imageManager.loadImage(url: bannerURL) }
@@ -228,24 +229,14 @@ extension DetailViewController {
     private func updateExampleImages(_ viewModel: DetailViewModel) async {
         let exampleURLs = viewModel.exampleImages
         
-        let examples = await withTaskGroup(of: UIImage?.self, returning: [UIImage?].self) { taskGroup in
-            for exampleURL in exampleURLs {
-                taskGroup.addTask { await self.imageManager.loadImage(url: exampleURL) }
-            }
-            
-            var images: [UIImage?] = []
-            for await result in taskGroup {
-                images.append(result)
-            }
-            return images
-        }
-        
-        for image in examples {
+        for exampleURL in exampleURLs {
+            let image = await imageManager.loadImage(url: exampleURL)
             let imageView = UIImageView(frame: .zero)
             imageView.contentMode = .scaleAspectFit
+            let heightRatio = CGFloat(image?.size.height ?? 0) / CGFloat(image?.size.width ?? 0)
             imageView.image = image?.resize(
                 withSize: CGSize(width: view.frame.width,
-                                 height: view.frame.width),
+                                 height: view.frame.width * heightRatio),
                 contentMode: .contentAspectFit)
             exampleImageStackView.addArrangedSubview(imageView)
         }
