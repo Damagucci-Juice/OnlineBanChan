@@ -16,6 +16,8 @@ class DetailViewController: UIViewController {
     
     private let imageManager = ImageManager.shared
     
+    var isBeforePresented: Bool = false
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -26,6 +28,8 @@ class DetailViewController: UIViewController {
     private let imageScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
         scrollView.contentMode = .scaleAspectFill
         return scrollView
     }()
@@ -34,6 +38,12 @@ class DetailViewController: UIViewController {
         let view = UIStackView()
         view.axis = .vertical
         view.spacing = 0
+        return view
+    }()
+    
+    private let exampleImageStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
         return view
     }()
     
@@ -61,31 +71,40 @@ class DetailViewController: UIViewController {
         return view
     }()
     
+    private let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
         setAttribute()
     }
     
-    private let disposeBag = DisposeBag()
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let newViewModel = self.viewModel {
+        if isBeforePresented,
+           let newViewModel = self.viewModel {
             self.bind(to: newViewModel)
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.isBeforePresented = true
+    }
+    
     private func setLayout() {
         
         view.addSubview(scrollView)
         scrollView.addSubview(containerStackView)
-        let subViews = [imageScrollView, informationView, orderView]
+        let subViews = [imageScrollView, informationView, orderView, exampleImageStackView]
         containerStackView.addArrangedSubViews(subViews)
         
         imageScrollView.addSubview(pageControl)
         
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+            //            $0.top.leading.trailing.equalToSuperview()
+            //            $0.bottom.equalTo(exampleImageStackView.snp.bottom)
         }
         
         containerStackView.snp.makeConstraints {
@@ -202,9 +221,7 @@ extension DetailViewController {
                 width: view.frame.size.width,
                 height: view.frame.size.width))
             page.image = banners[x]
-            Task {
-                imageScrollView.addSubview(page)
-            }
+            imageScrollView.addSubview(page)
         }
         setupPageControl(banners.count)
     }
@@ -225,14 +242,11 @@ extension DetailViewController {
         }
         
         for image in examples {
-            let imageView = UIImageView()
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
             imageView.contentMode = .scaleAspectFit
             // TODO: - 이미지의 사이즈를 화면 사이즈에 맞추기
-            Task {
-                imageView.image = image
-                containerStackView.addArrangedSubview(imageView)
-            }
-            
+            imageView.image = image
+            exampleImageStackView.addArrangedSubview(imageView)
         }
     }
 }

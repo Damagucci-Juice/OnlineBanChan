@@ -22,6 +22,8 @@ protocol ViewModel: AnyObject {
 protocol View: AnyObject {
     associatedtype ViewModel
     
+    var isBeforePresented: Bool { get set }
+    
     func bind(to viewModel: ViewModel)
 }
 

@@ -13,6 +13,8 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     private weak var imageManager = ImageManager.shared
     
+    var isBeforePresented: Bool = false
+    
     private var disposeBag = DisposeBag()
     
     private let imageView: UIImageView = {
