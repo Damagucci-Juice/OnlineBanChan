@@ -20,9 +20,12 @@ extension OnbanAPI: BaseAPI {
     var baseURL: URL {
         switch self {
         case .requestPayment:
-            let url = "https://hooks.slack.com/services/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"
-            let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-            return URL(string: encoded)!
+            guard let filePath = Bundle.main.path(forResource: "Api", ofType: "plist"),
+                  let resource = NSDictionary(contentsOfFile: filePath),
+                  let url = resource["API_URL"] as? String
+            else { assert(false) }
+
+            return URL(string: url)!
         default:
             return URL(string: "https://api.codesquad.kr/onban/")!
         }
