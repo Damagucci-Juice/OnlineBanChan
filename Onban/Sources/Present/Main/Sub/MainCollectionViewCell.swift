@@ -52,7 +52,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
     private let originPrice: UILabel = {
         let label = UILabel()
         label.font = UIFont.textSmallRegular
-        label.attributedText = UIFactory.makeAttributedString()
+//        label.attributedText = UIFactory.makeAttributedString()
         label.textColor = UIColor.grey2
         return label
     }()
@@ -136,11 +136,10 @@ extension MainCollectionViewCell: View {
         Task {
             imageView.image = await imageManager?.loadImage(url: entity.imageAddress)
         }
-        
         title.text = entity.title
         body.text = entity.body
         reducedPrice.text = entity.reducedPrice
-        originPrice.text = entity.originPrice
+        originPrice.attributedText = UIFactory.makeAttributedString(entity.originPrice ?? "") 
         eventStackView.addArrangedSubViews(UIFactory.makeEventBadges(entity.eventBadge))
     }
 }

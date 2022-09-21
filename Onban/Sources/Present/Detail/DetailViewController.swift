@@ -103,8 +103,6 @@ class DetailViewController: UIViewController {
         
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            //            $0.top.leading.trailing.equalToSuperview()
-            //            $0.bottom.equalTo(exampleImageStackView.snp.bottom)
         }
         
         containerStackView.snp.makeConstraints {
@@ -140,7 +138,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupNavigation() {
-        self.navigationItem.title = self.informationView.title.text
+        self.navigationItem.title = self.viewModel?.title
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
     

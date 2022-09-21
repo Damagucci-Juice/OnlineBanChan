@@ -39,7 +39,6 @@ class OrderView: UIView {
         let label = UILabel()
         label.textColor = UIColor.grey1
         label.font = UIFont.textMediumBold
-        label.text = "0"
         label.sizeToFit()
         return label
     }()
@@ -84,7 +83,6 @@ class OrderView: UIView {
         let label = UILabel()
         label.textColor = UIColor.black
         label.font = UIFont.textLargeBold
-        label.text = "10,000원"
         return label
     }()
     

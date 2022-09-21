@@ -69,7 +69,7 @@ final class DetailViewModel: ViewModel {
     private func setup(with object: DetailDish) {
         self.body = object.body
         self.reducedPrice = object.reducedPrice
-        self.originPrice = object.originPrice ?? 0
+        self.originPrice = object.originPrice ?? nil
         self.deliveryInfo = object.deliveryInfo
         self.deliveryCharge = object.deliveryFee
         self.savedMoney = object.point
