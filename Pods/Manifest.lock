@@ -1,24 +1,48 @@
 PODS:
+  - Kingfisher (7.3.2)
+  - RxAppState (1.7.1):
+    - RxCocoa (~> 6.2)
+    - RxSwift (~> 6.2)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
   - SnapKit (5.6.0)
   - SwiftLint (0.49.1)
   - Toaster (2.3.0)
 
 DEPENDENCIES:
+  - Kingfisher (~> 7.0)
+  - RxAppState
+  - RxCocoa (= 6.5.0)
+  - RxSwift (= 6.5.0)
   - SnapKit (~> 5.6.0)
   - SwiftLint
   - Toaster
 
 SPEC REPOS:
   trunk:
+    - Kingfisher
+    - RxAppState
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SnapKit
     - SwiftLint
     - Toaster
 
 SPEC CHECKSUMS:
+  Kingfisher: 0086ad83719761ba9b2cdaf6ef4d5b4878cbae23
+  RxAppState: 9c34f951d4ff8b9034f84016fe766202365bceb2
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftLint: 32ee33ded0636d0905ef6911b2b67bbaeeedafa5
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 6a954fb9eb5a5714e2387f16005a45d41d1c38fe
+PODFILE CHECKSUM: 76ff870aef3e794db0ae3eec218ba69a9b6e1eb7
 
 COCOAPODS: 1.11.3
