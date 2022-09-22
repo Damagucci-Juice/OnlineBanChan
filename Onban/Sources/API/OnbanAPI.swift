@@ -22,12 +22,14 @@ extension OnbanAPI: BaseAPI {
         case .requestPayment:
             guard let filePath = Bundle.main.path(forResource: "Api", ofType: "plist"),
                   let resource = NSDictionary(contentsOfFile: filePath),
-                  let url = resource["API_URL"] as? String
+                  let urlString = resource["API_URL"] as? String,
+                  let url = URL(string: urlString)
             else { assert(false) }
 
-            return URL(string: url)!
+            return url
         default:
-            return URL(string: "https://api.codesquad.kr/onban/")!
+            guard let url = URL(string: "https://api.codesquad.kr/onban/") else { assert(false) }
+            return url
         }
     }
     
@@ -53,7 +55,6 @@ extension OnbanAPI: BaseAPI {
         }
     }
     
-    // TODO: - Body 사용법 학습 필요
     var body: Data? {
         switch self {
         case .requestPayment(let payload):

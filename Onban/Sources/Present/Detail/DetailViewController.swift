@@ -196,8 +196,10 @@ extension DetailViewController: View {
         
         viewModel.state.successPayment
             .observe(on: MainScheduler.asyncInstance)
+            .withUnretained(self)
             .bind(onNext: { _ in
-                Toast(text: "결제가 완료되었습니다.").start()
+//                Toast(text: "결제가 완료되었습니다.").start()
+                self.showPaymentSuccess()
             })
             .disposed(by: disposeBag)
     }
@@ -246,5 +248,13 @@ extension DetailViewController {
                 contentMode: .contentAspectFit)
             exampleImageStackView.addArrangedSubview(imageView)
         }
+    }
+    
+    private func showPaymentSuccess() {
+        let alert = UIAlertController(title: "해당 상품을 주문했습니다.", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { [unowned self] _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
