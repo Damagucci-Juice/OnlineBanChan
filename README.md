@@ -20,10 +20,16 @@
 
 ### MainView 
 
+https://user-images.githubusercontent.com/50472122/191678132-d13170d0-a1a3-4499-937c-b893703fcd3b.mov
 
 ### DetailView 
 
+https://user-images.githubusercontent.com/50472122/191678177-4dc93a0f-ac41-4fb5-997d-3730e6add3cb.mov
+
 ### Payment
+
+https://user-images.githubusercontent.com/50472122/191678229-ff830a20-8e92-4d53-a035-470b96311d6e.mov
+
 
 ![](https://i.imgur.com/1CPIuxh.png)
 - SlackAPI 사용
