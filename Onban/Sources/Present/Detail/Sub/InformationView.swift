@@ -24,7 +24,6 @@ class InformationView: UIView {
         let label = UILabel()
         label.font = UIFont.textLargeBold
         label.textColor = UIColor.black
-        label.text = "오리 주물럭_반조리"
         return label
     }()
     
@@ -32,7 +31,6 @@ class InformationView: UIView {
         let label = UILabel()
         label.font = UIFont.textMediumRegular
         label.textColor = UIColor.grey2
-        label.text = "감칠맛 나는 매콤한 양념"
         return label
     }()
     
@@ -40,16 +38,13 @@ class InformationView: UIView {
         let label = UILabel()
         label.font = UIFont.textMediumBold
         label.textColor = UIColor.grey1
-        label.text = "12,640원"
         return label
     }()
     
     private let originPrice: UILabel = {
         let label = UILabel()
         label.font = UIFont.textMediumRegular
-        label.attributedText = UIFactory.makeAttributedString()
         label.textColor = UIColor.grey2
-        label.text = "15,800원"
         return label
     }()
     
@@ -112,7 +107,6 @@ class InformationView: UIView {
         let label = UILabel()
         label.font = UIFont.textSmallRegular
         label.textColor = UIColor.grey1
-        label.text = "126원"
         return label
     }()
     
@@ -128,7 +122,6 @@ class InformationView: UIView {
         let label = UILabel()
         label.font = UIFont.textSmallRegular
         label.textColor = UIColor.grey1
-        label.text = "2,500원 (40,000원 이상 구매 시 무료)"
         return label
     }()
     
@@ -206,7 +199,9 @@ extension InformationView {
         
         self.title.text = viewModel.title
         self.body.text = viewModel.body
-        self.originPrice.text = viewModel.originPrice?.asPriceString
+        if let originPrice = viewModel.originPrice {
+            self.originPrice.attributedText = UIFactory.makeAttributedString(originPrice.asPriceString)
+        }
         self.reducedPrice.text = viewModel.reducedPrice.asPriceString
         self.deliveryChargeValue.text = viewModel.deliveryCharge
         self.deliveryInfomationValue.text = viewModel.deliveryInfo

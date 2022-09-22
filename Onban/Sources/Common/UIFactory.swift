@@ -24,8 +24,7 @@ final class UIFactory {
         return result
     }
     
-    static func makeAttributedString() -> NSMutableAttributedString {
-        let string = "0원"
+    static func makeAttributedString(_ string: String) -> NSMutableAttributedString {
         let attributeString = NSMutableAttributedString(string: string)
         attributeString.addAttribute(
             NSAttributedString.Key.strikethroughStyle,

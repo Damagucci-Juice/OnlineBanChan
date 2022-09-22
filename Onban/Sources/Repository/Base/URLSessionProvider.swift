@@ -16,11 +16,9 @@ final class URLSessionProvider {
     
     func dataTask(request: URLRequest) async throws -> NetworkResult {
         let (data, response) = try await session.dataTask(for: request)
-        
         guard let httpResponse = response as? HTTPURLResponse else {
             return NetworkResult(.unknownError)
         }
-        
         if (200..<300).contains(httpResponse.statusCode) {
             return NetworkResult(data)
         }

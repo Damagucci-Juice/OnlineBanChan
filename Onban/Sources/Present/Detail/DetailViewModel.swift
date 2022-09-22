@@ -35,12 +35,13 @@ final class DetailViewModel: ViewModel {
     }
     
     struct Action {
-        let requestPayment = PublishRelay<Void>()
+        let requestPayment = PublishRelay<ItemTotalPriceAndAmount>()
         let loadDetail = PublishRelay<Void>()
     }
     
     struct State {
         let readyViewModel = PublishRelay<Void>()
+        let successPayment = PublishRelay<Void>()
     }
     
     let action = Action()
@@ -50,6 +51,10 @@ final class DetailViewModel: ViewModel {
         action.loadDetail
             .map { self.detailHash }
             .bind(onNext: requestDetail)
+            .disposed(by: disposeBag)
+        
+        action.requestPayment
+            .bind(onNext: requestPayment)
             .disposed(by: disposeBag)
     }
     
@@ -66,10 +71,20 @@ final class DetailViewModel: ViewModel {
         }
     }
     
+    private func requestPayment(_ item: ItemTotalPriceAndAmount) {
+        Task {
+            let receive = try await repository.requestPayment(item)
+            if receive.error != nil { return }
+            if receive.value == true {
+                state.successPayment.accept(())
+            }
+        }
+    }
+    
     private func setup(with object: DetailDish) {
         self.body = object.body
         self.reducedPrice = object.reducedPrice
-        self.originPrice = object.originPrice ?? 0
+        self.originPrice = object.originPrice ?? nil
         self.deliveryInfo = object.deliveryInfo
         self.deliveryCharge = object.deliveryFee
         self.savedMoney = object.point

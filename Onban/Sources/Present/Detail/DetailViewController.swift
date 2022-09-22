@@ -10,11 +10,14 @@ import SnapKit
 import RxRelay
 import RxSwift
 import RxAppState
+import Toaster
 
 class DetailViewController: UIViewController {
     typealias ViewModel = DetailViewModel
     
     private let imageManager = ImageManager.shared
+    
+    var isBeforePresented: Bool = false
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -26,6 +29,8 @@ class DetailViewController: UIViewController {
     private let imageScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
         scrollView.contentMode = .scaleAspectFill
         return scrollView
     }()
@@ -34,6 +39,12 @@ class DetailViewController: UIViewController {
         let view = UIStackView()
         view.axis = .vertical
         view.spacing = 0
+        return view
+    }()
+    
+    private let exampleImageStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
         return view
     }()
     
@@ -57,9 +68,11 @@ class DetailViewController: UIViewController {
     }()
     
     private let orderView: OrderView = {
-        let view = OrderView(itemInformation: ItemTotalPriceAndAmount())
+        let view = OrderView()
         return view
     }()
+    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,19 +80,24 @@ class DetailViewController: UIViewController {
         setAttribute()
     }
     
-    private let disposeBag = DisposeBag()
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let newViewModel = self.viewModel {
+        if isBeforePresented,
+           let newViewModel = self.viewModel {
             self.bind(to: newViewModel)
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.isBeforePresented = true
+    }
+    
     private func setLayout() {
         
         view.addSubview(scrollView)
         scrollView.addSubview(containerStackView)
-        let subViews = [imageScrollView, informationView, orderView]
+        let subViews = [imageScrollView, informationView, orderView, exampleImageStackView]
         containerStackView.addArrangedSubViews(subViews)
         
         imageScrollView.addSubview(pageControl)
@@ -117,12 +135,12 @@ class DetailViewController: UIViewController {
         setupNavigation()
         setupImageScrollView()
         self.view.backgroundColor = UIColor.white
-        orderView.delegate = self
     }
     
     private func setupNavigation() {
-        self.navigationItem.title = self.informationView.title.text
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationItem.title = self.viewModel?.title
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "뒤로")
     }
     
     private func setupImageScrollView() {
@@ -152,13 +170,6 @@ extension DetailViewController: UIScrollViewDelegate {
     }
 }
 
-extension DetailViewController: PaymentRequestResponder {
-    func requestPayment(_ itemInformation: ItemTotalPriceAndAmount) {
-        print("detailVC 에서 \(itemInformation.totalPirce)를 확인하였습니다.")
-        viewModel?.action.requestPayment.accept(())
-    }
-}
-
 extension DetailViewController: View {
     func bind(to viewModel: DetailViewModel) {
         rx.viewDidLoad
@@ -169,11 +180,26 @@ extension DetailViewController: View {
             .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { [unowned self] in
                 self.informationView.setupInformations(viewModel)
-                self.orderView.updateItemInformation(viewModel.reducedPrice)
+                self.orderView.updateItemInformation(viewModel)
                 Task {
                     await self.updateBannerImages(viewModel)
                     await self.updateExampleImages(viewModel)
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        orderView.orderButton.rx.tap
+            .withUnretained(self)
+            .compactMap { _ in self.orderView.itemInformation }
+            .bind(to: viewModel.action.requestPayment)
+            .disposed(by: disposeBag)
+        
+        viewModel.state.successPayment
+            .observe(on: MainScheduler.asyncInstance)
+            .withUnretained(self)
+            .bind(onNext: { _ in
+//                Toast(text: "결제가 완료되었습니다.").start()
+                self.showPaymentSuccess()
             })
             .disposed(by: disposeBag)
     }
@@ -183,6 +209,7 @@ extension DetailViewController {
     
     private func updateBannerImages(_ viewModel: DetailViewModel) async {
         let bannerURLs = viewModel.bannerImages
+
         let banners = await withTaskGroup(of: UIImage?.self, returning: [UIImage?].self) { taskGroup in
             for bannerURL in bannerURLs {
                 taskGroup.addTask { await self.imageManager.loadImage(url: bannerURL) }
@@ -202,9 +229,7 @@ extension DetailViewController {
                 width: view.frame.size.width,
                 height: view.frame.size.width))
             page.image = banners[x]
-            Task {
-                imageScrollView.addSubview(page)
-            }
+            imageScrollView.addSubview(page)
         }
         setupPageControl(banners.count)
     }
@@ -212,27 +237,24 @@ extension DetailViewController {
     private func updateExampleImages(_ viewModel: DetailViewModel) async {
         let exampleURLs = viewModel.exampleImages
         
-        let examples = await withTaskGroup(of: UIImage?.self, returning: [UIImage?].self) { taskGroup in
-            for exampleURL in exampleURLs {
-                taskGroup.addTask { await self.imageManager.loadImage(url: exampleURL) }
-            }
-            
-            var images: [UIImage?] = []
-            for await result in taskGroup {
-                images.append(result)
-            }
-            return images
-        }
-        
-        for image in examples {
-            let imageView = UIImageView()
+        for exampleURL in exampleURLs {
+            let image = await imageManager.loadImage(url: exampleURL)
+            let imageView = UIImageView(frame: .zero)
             imageView.contentMode = .scaleAspectFit
-            // TODO: - 이미지의 사이즈를 화면 사이즈에 맞추기
-            Task {
-                imageView.image = image
-                containerStackView.addArrangedSubview(imageView)
-            }
-            
+            let heightRatio = CGFloat(image?.size.height ?? 0) / CGFloat(image?.size.width ?? 0)
+            imageView.image = image?.resize(
+                withSize: CGSize(width: view.frame.width,
+                                 height: view.frame.width * heightRatio),
+                contentMode: .contentAspectFit)
+            exampleImageStackView.addArrangedSubview(imageView)
         }
+    }
+    
+    private func showPaymentSuccess() {
+        let alert = UIAlertController(title: "해당 상품을 주문했습니다.", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: { [unowned self] _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }

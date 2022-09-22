@@ -60,6 +60,8 @@
 		00D60CA128C876C500BBA3FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D60CA028C876C500BBA3FC /* LoginViewController.swift */; };
 		00D60CA228C876C500BBA3FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D60CA028C876C500BBA3FC /* LoginViewController.swift */; };
 		00D60CA328C876C500BBA3FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D60CA028C876C500BBA3FC /* LoginViewController.swift */; };
+		00DACD3228DB25390050332F /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DACD3128DB25390050332F /* Payload.swift */; };
+		00DACD3428DB464E0050332F /* Api.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00DACD3328DB464E0050332F /* Api.plist */; };
 		00F432CE28C8340300557C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432CD28C8340300557C58 /* AppDelegate.swift */; };
 		00F432D028C8340300557C58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432CF28C8340300557C58 /* SceneDelegate.swift */; };
 		00F432D228C8340300557C58 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F432D128C8340300557C58 /* MainViewController.swift */; };
@@ -152,6 +154,8 @@
 		00D60C9928C871A600BBA3FC /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		00D60C9D28C875FF00BBA3FC /* Onban.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Onban.entitlements; sourceTree = "<group>"; };
 		00D60CA028C876C500BBA3FC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		00DACD3128DB25390050332F /* Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
+		00DACD3328DB464E0050332F /* Api.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Api.plist; sourceTree = "<group>"; };
 		00F432CA28C8340300557C58 /* Onban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Onban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00F432CD28C8340300557C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		00F432CF28C8340300557C58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				00F432DB28C8340400557C58 /* Info.plist */,
+				00DACD3328DB464E0050332F /* Api.plist */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 			children = (
 				006168EE28C989630047641E /* CategoryDTO.swift */,
 				006168F028C989D60047641E /* DishDTO.swift */,
+				00DACD3128DB25390050332F /* Payload.swift */,
 				00D5855428D449BD004FDB9F /* DetailDishDTO.swift */,
 				005191D028D4041400FB8F8F /* Dish.swift */,
 				005191D628D432ED00FB8F8F /* DetailDish.swift */,
@@ -579,6 +585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00D60C9A28C871A600BBA3FC /* .swiftlint.yml in Resources */,
+				00DACD3428DB464E0050332F /* Api.plist in Resources */,
 				00D5CD6428C85CF3001DE12A /* SF-Pro-Display-Regular.otf in Resources */,
 				006168A128C892D10047641E /* Assets.xcassets in Resources */,
 				006168A328C8949B0047641E /* Launch Screen.storyboard in Resources */,
@@ -745,6 +752,7 @@
 				003D106328D4A77F00EA1A52 /* String+Extension.swift in Sources */,
 				00D4321628D368F900DED7D5 /* MainCellViewModel.swift in Sources */,
 				006168A728C8BC670047641E /* MainCollectionViewCell.swift in Sources */,
+				00DACD3228DB25390050332F /* Payload.swift in Sources */,
 				00D4321828D371C000DED7D5 /* CategoryType.swift in Sources */,
 				005191D728D432ED00FB8F8F /* DetailDish.swift in Sources */,
 				006168ED28C8F27A0047641E /* LayoutConstant.swift in Sources */,
