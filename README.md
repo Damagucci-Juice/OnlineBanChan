@@ -83,4 +83,33 @@ Coordinator 가 화면 전환을 담당하고 DIContainer 가 객체 생성을 �
 ### 3. Cell을 표시하는 DataSource가 ViewModel을 소유하고 있어도 되는가에 대한 문제
 - 뷰 모델을 VC에 놓아야할지, 실질적으로 Cell 이 그려지는 DataSource에 두어야할지 확신이 없었다. 
 - 그러던차에 동료의 권유로 MVVM 과 Clean Architect 를 적용한 프로젝트를 참고하였다. 
-- 여기선 VC 가 VM을 소유하고, Cell 마다 CellViewModel을 소유했다. 
+- 여기선 VC 가 VM을 소유하고, **Cell 마다 CellViewModel**을 소유했다. 
+
+### 4. 이미지의 사이즈를 알지 못하는 상황에서 UIImageView의 크기를 정하기.
+- 미래에 올 수 있는 이미지의 개수를 모르는 상황에서 전체 뷰의 크기를 미리 정할 수 없었다. 
+    - 조리예 사진이 2개 오는 상품과 3개 오는 상품이 나뉨
+    - -> UIStackView 를 사용해 해결
+- 스택 뷰를 사용하다 보니, 생성하려는 UIImageView의 크기를 알 수 없었다. 또한 사진 개수에 따라서 변화하는 이미지뷰의 개수 때문에 frame을 지정하는 방식이나, Auto Layout을 정해주는 방식을 사용할 수 없었다.
+- 이미지뷰의 크기를 어떻게 잡을 것인가?
+    - UIImageView는 내부의 컨텐츠의 크기에 따라 사이즈가 결정되는 구조에서 착안
+    - UIImage 의 사이즈 자체를 `resize`하는 작업을 해주었다. 
+    - UIImage.size의 width와 height의 비율을 구하고, 그 비율에 맞게 View의 width에 곱한 값을 지정
+```swift
+    func resize(withSize size: CGSize, contentMode: ContentMode = .contentAspectFill) -> UIImage? {
+        let aspectWidth = size.width / self.size.width
+        let aspectHeight = size.height / self.size.height
+        
+        switch contentMode {
+        case .contentFill:
+            return resize(withSize: size)
+        case .contentAspectFit:
+            let aspectRatio = min(aspectWidth, aspectHeight)
+            return resize(withSize: CGSize(width: self.size.width * aspectRatio,
+                                           height: self.size.height * aspectRatio))
+        case .contentAspectFill:
+            let aspectRatio = max(aspectWidth, aspectHeight)
+            return resize(withSize: CGSize(width: self.size.width * aspectRatio,
+                                           height: self.size.height * aspectRatio))
+        }
+    }
+```
